@@ -1,0 +1,84 @@
+// $icon-font-path: "../styles/fonts/"; // Change the path to the fonts
+// @import "bootstrap-sass/lib/bootstrap";
+@import 'packages/bootstrap3-sass/bootstrap';
+
+/* Put your CSS here */
+html, body {
+    margin: 0;
+}
+
+div.coreslab-logo {
+	background-image: url(/images/coreslab_logo.png);
+	background-repeat: no-repeat;
+	background-size:contain;
+	background-position:center;
+	.big {
+		@include size(240px, 50px);
+	}
+	.small {
+		@include size(192px, 40px);
+	}
+	margin: 0;
+}
+
+.navbar-brand {
+	margin: 0;
+	padding: 0px 32px 0px 16px;
+}
+
+@mixin hidden {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+@mixin show {
+	display: inline !important;
+}
+
+:not(.collapsed) {
+	>.table-shown {
+		@include show;
+	}
+
+	>.table-collapsed {
+		@include hidden;
+	}
+}
+
+.collapsed {
+	>.table-shown {
+		@include hidden;
+	}
+	>.table-collapsed {
+		@include show;
+	}
+}
+
+.ios-clickable-shim {
+	cursor: pointer;
+}
+
+div.table-sidebar {
+	table {
+		table-layout: fixed;
+
+		td {
+			@include text-overflow;
+		}
+
+		th:first-of-type {
+			width: 6em;
+		}
+	}
+}
+
+.panel-header .project-description {
+	display: inline-block;
+}
+
+@media (min-width: $screen-md-min) {
+	div.table-collapse.collapse.table-sidebar {
+		height: auto;
+		display: block;
+	}
+}
