@@ -12,10 +12,11 @@
 </template>
 
 <template name="workflow_tab">
-<li class="{{CurrentNavActive link}}"><a href="{{link}}">{{name}}</a></li>
+<li class="{{CurrentSlugActive slug}}"><a href="{{SlugRoute '/workflows' slug}}">{{name}}</a></li>
 </template>
 
 <template name="workflow">
+{{#if actionLinks}}
 <div class="well col-md-3">
 	<div class="panel-body">
 		<div class="btn-group-vertical">
@@ -25,6 +26,12 @@
 		</div>
 	</div>
 </div>
+{{else}}
+<div class="jumbotron">
+    <h1>Coming Soon...</h1>
+    <p>This page is currently under development.</p>
+</div>
+{{/if}}
 </template>
 
 <template name="action_link">
