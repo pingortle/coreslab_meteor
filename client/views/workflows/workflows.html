@@ -1,9 +1,32 @@
 <template name="workflows">
 <ul class="nav nav-tabs nav-justified">
 {{#each workflows}}
-	{{#if this.isToplevel}}
-		
-	{{/if}}
+{{> workflow_tab}}
 {{/each}}
 </ul>
+<div class="tab-pane">
+{{#with activeWorkflow}}
+{{> workflow}}
+{{/with}}
+</div>
+</template>
+
+<template name="workflow_tab">
+<li><a href="{{link}}">{{name}}</a></li>
+</template>
+
+<template name="workflow">
+<div class="well col-md-3">
+	<div class="panel-body">
+		<div class="btn-group-vertical">
+		{{#each actionLinks}}
+		{{> action_link}}
+		{{/each}}
+		</div>
+	</div>
+</div>
+</template>
+
+<template name="action_link">
+<a href="{{link}}" class="btn btn-default">{{button_label}}</a>
 </template>
