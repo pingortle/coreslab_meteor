@@ -5,6 +5,7 @@
     "font-awesome-4-less": {},
     "iron-router": {},
     "bootstrap3-sass": {},
-    "authorization": {}
+    "authorization": {},
+    "roles": {}
   }
 }

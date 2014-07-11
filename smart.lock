@@ -7,7 +7,8 @@
       "font-awesome-4-less": {},
       "iron-router": {},
       "bootstrap3-sass": {},
-      "authorization": {}
+      "authorization": {},
+      "roles": {}
     },
     "packages": {
       "accounts-ui-bootstrap-3": {
@@ -39,6 +40,11 @@
         "git": "https://github.com/deepwell/meteor-authorization.git",
         "tag": "v2.0.4",
         "commit": "a1e222fc2f4caf81906bb1b57dd7f6efa4a0d071"
+      },
+      "roles": {
+        "git": "https://github.com/alanning/meteor-roles.git",
+        "tag": "v1.2.10",
+        "commit": "7ccb35de0a6cb0c9a0c3666badd04757e39c09a6"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",

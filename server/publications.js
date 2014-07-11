@@ -1,13 +1,25 @@
+var roleArray = function(userId) {
+	var roles = Roles.getRolesForUser(this.userId) || [];
+	return roles.map(function(x) {
+		return x.name;
+	});
+}
+
 Meteor.publish('workflows', function(allowed) {
-	if (this.userId)
-		return Workflows.find();
-	else
+	if (this.userId) {
+		if (Roles.userIsInRole(this.userId, ['super']))
+			return Workflows.find();
+		else
+			return Workflows.find({slug: { $in: roleArray(this.userId) }});
+	}
+	else {
 		this.ready();
+	}
 });
 
 Meteor.publish('managedUsers', function() {
-	if (this.userId)
-		return Meteor.users.find();
+	if (Roles.userIsInRole(this.userId, ['super']))
+			return Meteor.users.find();
 	else
 		this.ready();
 });
