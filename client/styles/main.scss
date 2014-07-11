@@ -12,12 +12,7 @@ div.coreslab-logo {
 	background-repeat: no-repeat;
 	background-size:contain;
 	background-position:center;
-	.big {
-		@include size(240px, 50px);
-	}
-	.small {
-		@include size(192px, 40px);
-	}
+	@include size(192px, 40px);
 	margin: 0;
 }
 
