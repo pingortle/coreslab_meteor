@@ -36,27 +36,29 @@
 		<h2>{{wbs}} <small class="project-description">{{description}}</small></h2>
 	</div>
 	<div class="panel-body">
-		<dl class="dl-horizontal">
-			{{#if customer.name}}
-			<dt>Customer:</dt><dd>{{customer.name}}</dd>
-			{{/if}}
-			<dt>Status:</dt><dd>Sold</dd>
-			<dt>Job Type:</dt><dd>Architecture</dd>
-			<dt>Subtype:</dt><dd></dd>
-			<dt>GEAC Number:</dt><dd>XXXX</dd>
-			<dt>Date Entered:</dt><dd>mm/dd/yy</dd>
-			<dt>Date Completed:</dt><dd>??/??/??</dd>
-			<dt>Pours:</dt>
-			<dd>
-				<dl>
-				{{#each pours}}
-					<dt>Men:</dt><dd>{{men}}</dd>
-					<dt>Start:</dt><dd>{{start}}</dd>
-					<dt>End:</dt><dd>{{end}}</dd>
-				{{/each}}
-				</dl>
-			</dd>
-		</dl>
+		<div class="well">
+			<dl class="dl-horizontal">
+				{{#if customer.name}}
+				<dt>Customer:</dt><dd>{{customer.name}}</dd>
+				{{/if}}
+				<dt>Status:</dt><dd>Sold</dd>
+				<dt>Job Type:</dt><dd>Architecture</dd>
+				<dt>Subtype:</dt><dd></dd>
+				<dt>GEAC Number:</dt><dd>XXXX</dd>
+				<dt>Date Entered:</dt><dd>mm/dd/yy</dd>
+				<dt>Date Completed:</dt><dd>??/??/??</dd>
+				<dt>Pours:</dt>
+				<dd>
+					<dl>
+					{{#each pours}}
+						<dt>Men:</dt><dd>{{men}}</dd>
+						<dt>Start:</dt><dd>{{start}}</dd>
+						<dt>End:</dt><dd>{{end}}</dd>
+					{{/each}}
+					</dl>
+				</dd>
+			</dl>
+		</div>
 	</div>
 </div>
 {{/with}}
