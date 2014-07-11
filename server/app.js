@@ -54,4 +54,28 @@ Meteor.startup(function() {
 			Workflows.insert(x);
 		});
 	}
+
+	if (Projects.find().count() === 0) {
+		var projects = [
+			{
+				wbs: "010.017",
+				description: "Southwest PowerPool Ops Center/Parking Garage",
+			},
+			{
+				wbs: "012.002",
+				description: "Valley View Gym",
+			},
+			{
+				wbs: "012.018",
+				description: "Calico Rock Addition",
+			},
+			{
+				wbs: "012.014",
+				description: "Brookland High School Addition",
+			},
+		];
+		_.each(projects, function(x) {
+			Projects.insert(x);
+		});
+	}
 });

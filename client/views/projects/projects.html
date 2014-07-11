@@ -1,0 +1,63 @@
+<template name="projects">
+<div class="row">
+	<div class="col-md-4 hidden-print">
+		<div class="table-sidebar table-collapse in">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Project ID</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#each projects}}
+					<tr id="{{wbs}}" class="{{CurrentSlugActive wbs}} project-row">
+						<td>{{wbs}}</td>
+						<td>{{description}}</td>
+					</tr>
+					{{/each}}
+				</tbody>
+			</table>
+		</div>
+		<button type="button" class="btn btn-default btn-block visible-xs visible-sm" data-toggle="collapse" data-target=".table-collapse">
+		<span class="table-shown">Hide</span><span class="table-collapsed">Show</span> Projects
+		</button>
+	</div>
+	<div class="col-md-8">
+	{{> project_data}}
+	</div>
+</div>
+</template>
+
+<template name="project_data">
+{{#with activeProject}}
+<div class="panel">
+	<div class="panel-header">
+		<h2>{{wbs}} <small class="project-description">{{description}}</small></h2>
+	</div>
+	<div class="panel-body">
+		<dl class="dl-horizontal">
+			{{#if customer.name}}
+			<dt>Customer:</dt><dd>{{customer.name}}</dd>
+			{{/if}}
+			<dt>Status:</dt><dd>Sold</dd>
+			<dt>Job Type:</dt><dd>Architecture</dd>
+			<dt>Subtype:</dt><dd></dd>
+			<dt>GEAC Number:</dt><dd>XXXX</dd>
+			<dt>Date Entered:</dt><dd>mm/dd/yy</dd>
+			<dt>Date Completed:</dt><dd>??/??/??</dd>
+			<dt>Pours:</dt>
+			<dd>
+				<dl>
+				{{#each pours}}
+					<dt>Men:</dt><dd>{{men}}</dd>
+					<dt>Start:</dt><dd>{{start}}</dd>
+					<dt>End:</dt><dd>{{end}}</dd>
+				{{/each}}
+				</dl>
+			</dd>
+		</dl>
+	</div>
+</div>
+{{/with}}
+</template>

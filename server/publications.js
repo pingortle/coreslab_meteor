@@ -5,6 +5,13 @@ var roleArray = function(userId) {
 	});
 }
 
+Meteor.publish('managedUsers', function() {
+	if (Roles.userIsInRole(this.userId, ['super']))
+			return Meteor.users.find();
+	else
+		this.ready();
+});
+
 Meteor.publish('workflows', function(allowed) {
 	if (this.userId) {
 		if (Roles.userIsInRole(this.userId, ['super']))
@@ -17,9 +24,7 @@ Meteor.publish('workflows', function(allowed) {
 	}
 });
 
-Meteor.publish('managedUsers', function() {
-	if (Roles.userIsInRole(this.userId, ['super']))
-			return Meteor.users.find();
-	else
-		this.ready();
+Meteor.publish('projects', function() {
+	if (this.userId)
+		return Projects.find();
 });
