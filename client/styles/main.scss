@@ -1,8 +1,8 @@
 // $icon-font-path: "../styles/fonts/"; // Change the path to the fonts
-// @import "bootstrap-sass/lib/bootstrap";
+@import 'client/styles/theme/variables';
 @import 'packages/bootstrap3-sass/bootstrap';
+@import 'client/styles/theme/bootswatch';
 
-/* Put your CSS here */
 html, body {
     margin: 0;
 }
