@@ -1,0 +1,12 @@
+<template name="user_settings">
+<h2>Users:</h2>
+<ul>
+{{#each this}}
+	<li>
+	{{#each this.emails}}
+	{{this.address}}<br>
+	{{/each}}
+	</li>
+{{/each}}
+</ul>
+</template>
