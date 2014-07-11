@@ -8,7 +8,8 @@
       "iron-router": {},
       "bootstrap3-sass": {},
       "authorization": {},
-      "roles": {}
+      "roles": {},
+      "fastclick": {}
     },
     "packages": {
       "accounts-ui-bootstrap-3": {
@@ -45,6 +46,11 @@
         "git": "https://github.com/alanning/meteor-roles.git",
         "tag": "v1.2.10",
         "commit": "7ccb35de0a6cb0c9a0c3666badd04757e39c09a6"
+      },
+      "fastclick": {
+        "git": "https://github.com/percolatestudio/meteor-fastclick",
+        "tag": "v0.6.7",
+        "commit": "fcb3bfd34d9f6874e626b4e24e8f54107938db41"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",
