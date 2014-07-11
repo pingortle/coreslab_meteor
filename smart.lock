@@ -6,7 +6,8 @@
       "less-bootstrap-3": {},
       "font-awesome-4-less": {},
       "iron-router": {},
-      "bootstrap3-sass": {}
+      "bootstrap3-sass": {},
+      "authorization": {}
     },
     "packages": {
       "accounts-ui-bootstrap-3": {
@@ -33,6 +34,11 @@
         "git": "https://github.com/reywood/meteor-bootstrap3-sass.git",
         "tag": "v3.1.1-5",
         "commit": "d61b7c69aecf1c2033db6b8d283fcfabe9788451"
+      },
+      "authorization": {
+        "git": "https://github.com/deepwell/meteor-authorization.git",
+        "tag": "v2.0.4",
+        "commit": "a1e222fc2f4caf81906bb1b57dd7f6efa4a0d071"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",
