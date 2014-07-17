@@ -16,6 +16,10 @@
 						<td>{{description}}</td>
 					</tr>
 					{{/each}}
+					<tr class="project-row">
+						<td><a class="btn btn-default btn-xs add-project" href="/projects/new">+</a></td>
+						<td>Add a new project…</td>
+					</tr>
 				</tbody>
 			</table>
 		</div>
@@ -62,4 +66,8 @@
 	</div>
 </div>
 {{/with}}
+</template>
+
+<template name="new_project">
+{{> quickForm collection="Projects" id="new_project_form" type="insert"}}
 </template>

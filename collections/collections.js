@@ -50,3 +50,14 @@ AppSchema.Project = new SimpleSchema({
 
 Projects = new Meteor.Collection('projects');
 Projects.attachSchema(AppSchema.Project);
+
+_.each([Workflows, Projects], function(collection) {
+	collection.allow({
+		insert: function(uID) {
+			return uID;
+		},
+		update: function(uID) {
+			return uID;
+		},
+	});
+})

@@ -1,5 +1,7 @@
 Template.projects.events({
 	'click .project-row': function(event) {
-		Router.go('project', { wbs: event.currentTarget.id });
+		var wbs = event.currentTarget.id;
+		if (wbs)
+			Router.go('project', { wbs: wbs });
 	},
 });
