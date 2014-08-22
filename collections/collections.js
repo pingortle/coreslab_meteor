@@ -33,6 +33,8 @@ AppSchema.Workflow = new SimpleSchema({
 Workflows = new Meteor.Collection('workflows');
 Workflows.attachSchema(AppSchema.Workflow);
 
+var projectStatusAllowedVals = ["sold", "cancelled", "pending"];
+
 AppSchema.Project = new SimpleSchema({
 	wbs: {
 		type: String,
@@ -45,6 +47,16 @@ AppSchema.Project = new SimpleSchema({
 		type: String,
 		label: "Description",
 		max: 100,
+	},
+	status: {
+		type: String,
+		label: "Status",
+		allowedValues: projectStatusAllowedVals,
+		autoform: {
+			options: _.map(projectStatusAllowedVals, function(val) {
+					return { label: val.charAt(0).toUpperCase() + val.slice(1), value: val };
+				}),
+		},
 	},
 });
 
