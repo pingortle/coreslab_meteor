@@ -73,3 +73,8 @@ _.each([Workflows, Projects], function(collection) {
 		},
 	});
 })
+
+SimpleSchema.messages(
+{
+	"regEx wbs": "WBS should be made up of digits and periods, e.g. 123.456",
+});
