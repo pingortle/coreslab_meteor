@@ -11,8 +11,8 @@
 				</thead>
 				<tbody>
 					{{#each projects}}
-					<tr class="{{CurrentSlugActive wbs}} project-row" data-wbs="{{wbs}}">
-						<td>{{wbs}}</td>
+					<tr class="{{CurrentSlugActive id}} project-row" data-projectId="{{id}}">
+						<td>{{id}}</td>
 						<td>{{description}}</td>
 					</tr>
 					{{/each}}
@@ -37,7 +37,7 @@
 {{#with activeProject}}
 <div class="panel">
 	<div class="panel-header">
-		<h2>{{wbs}} <small class="project-description">{{description}}</small></h2>
+		<h2>{{id}} <small class="project-description">{{description}}</small></h2>
 	</div>
 	<div class="panel-body">
 		<div class="well">
@@ -45,10 +45,7 @@
 				{{#if customer.name}}
 				<dt>Customer:</dt><dd>{{customer.name}}</dd>
 				{{/if}}
-				<dt>Status:</dt><dd>Sold</dd>
-				<dt>Job Type:</dt><dd>Architecture</dd>
-				<dt>Subtype:</dt><dd></dd>
-				<dt>GEAC Number:</dt><dd>XXXX</dd>
+				<dt>Status:</dt><dd>{{status}}</dd>
 				<dt>Date Entered:</dt><dd>mm/dd/yy</dd>
 				<dt>Date Completed:</dt><dd>??/??/??</dd>
 				<dt>Pours:</dt>

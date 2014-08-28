@@ -34,11 +34,12 @@ Workflows = new Meteor.Collection('workflows');
 Workflows.attachSchema(AppSchema.Workflow);
 
 var projectStatusAllowedVals = ["sold", "cancelled", "pending"];
+var projectIdRegex = /^[0-9]{3}\.[0-9]{3}$/;
 
 AppSchema.Project = new SimpleSchema({
-	wbs: {
+	id: {
 		type: String,
-		label: "WBS",
+		label: "Project",
 		regEx: /^[0-9]{3}\.[0-9]{3}$/,
 		index: true,
 		unique: true,
@@ -63,6 +64,18 @@ AppSchema.Project = new SimpleSchema({
 Projects = new Meteor.Collection('projects');
 Projects.attachSchema(AppSchema.Project);
 
+AppSchema.Piece - new SimpleSchema({
+	project: {
+		type: String,
+		label: "Project ID",
+		regEx: projectIdRegex,
+	},
+
+});
+
+Piece = new Meteor.Collection('peices');
+Piece.attachSchema(AppSchema.Piece);
+
 _.each([Workflows, Projects], function(collection) {
 	collection.allow({
 		insert: function(uID) {
@@ -74,7 +87,7 @@ _.each([Workflows, Projects], function(collection) {
 	});
 })
 
-SimpleSchema.messages(
+Projects.simpleSchema().messages(
 {
-	"regEx wbs": "WBS should be made up of digits and periods, e.g. 123.456",
+	"regEx id": "Project IDs should be made up of digits and periods, e.g. 123.456",
 });

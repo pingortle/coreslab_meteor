@@ -18,4 +18,4 @@ UI.registerHelper('CurrentNavRootActive', function (route) {
 
 UI.registerHelper('SlugRoute', function (root, slug) {
 	return root + "/" + slug;
-})
+});

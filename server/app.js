@@ -58,22 +58,22 @@ Meteor.startup(function() {
 	if (Projects.find().count() === 0) {
 		var projects = [
 			{
-				wbs: "010.017",
+				id: "010.017",
 				description: "Southwest PowerPool Ops Center/Parking Garage",
 				status: "sold",
 			},
 			{
-				wbs: "012.002",
+				id: "012.002",
 				description: "Valley View Gym",
 				status: "sold",
 			},
 			{
-				wbs: "012.018",
+				id: "012.018",
 				description: "Calico Rock Addition",
 				status: "sold",
 			},
 			{
-				wbs: "012.014",
+				id: "012.014",
 				description: "Brookland High School Addition",
 				status: "sold",
 			},
