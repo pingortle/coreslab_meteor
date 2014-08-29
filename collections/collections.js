@@ -64,29 +64,6 @@ AppSchema.Project = new SimpleSchema({
 Projects = new Meteor.Collection('projects');
 Projects.attachSchema(AppSchema.Project);
 
-AppSchema.Piece - new SimpleSchema({
-	project: {
-		type: String,
-		label: "Project ID",
-		regEx: projectIdRegex,
-	},
-
-});
-
-Piece = new Meteor.Collection('peices');
-Piece.attachSchema(AppSchema.Piece);
-
-_.each([Workflows, Projects], function(collection) {
-	collection.allow({
-		insert: function(uID) {
-			return uID;
-		},
-		update: function(uID) {
-			return uID;
-		},
-	});
-})
-
 Projects.simpleSchema().messages(
 {
 	"regEx id": "Project IDs should be made up of digits and periods, e.g. 123.456",
