@@ -49,6 +49,11 @@ AppSchema.Project = new SimpleSchema({
 		label: "Description",
 		max: 100,
 	},
+	customer: {
+		type: String,
+		label: "Customer",
+		max: 100,
+	},
 	status: {
 		type: String,
 		label: "Status",
@@ -58,6 +63,43 @@ AppSchema.Project = new SimpleSchema({
 					return { label: val.charAt(0).toUpperCase() + val.slice(1), value: val };
 				}),
 		},
+	},
+	estimatedPourCount: {
+		type: Number,
+		label: "Estimated Total Pours",
+		min: 1,
+	},
+	estimatedLoads: {
+		type: Object,
+		label: "Estimated Loads",
+	},
+	"estimatedLoads.legal": {
+		type: Number,
+		label: "Truckloads Legal",
+		min: 0,
+	},
+	"estimatedLoads.permit": {
+		type: Number,
+		label: "Truckloads Permit",
+		min: 0,
+	},
+	"estimatedLoads.escort": {
+		type: Number,
+		label: "Truckloads Escort",
+		min: 0,
+	},
+
+	createdAt: {
+		type: Date,
+		autoValue: function() {
+			if (this.isInsert) {
+				return new Date;
+			} else if (this.isUpsert) {
+				return { $setOnInsert: new Date };
+			} else {
+				this.unset();
+			}
+		}
 	},
 });
 
