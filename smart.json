@@ -1,11 +1,8 @@
 {
   "packages": {
     "accounts-ui-bootstrap-3": {},
-    "less-bootstrap-3": {},
-    "font-awesome-4-less": {},
     "iron-router": {},
     "bootstrap3-sass": {},
-    "authorization": {},
     "roles": {},
     "fastclick": {},
     "autoform": {}
