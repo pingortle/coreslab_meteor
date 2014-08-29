@@ -40,7 +40,7 @@ AppSchema.Project = new SimpleSchema({
 	id: {
 		type: String,
 		label: "Project",
-		regEx: /^[0-9]{3}\.[0-9]{3}$/,
+		regEx: projectIdRegex,
 		index: true,
 		unique: true,
 	},
@@ -107,7 +107,90 @@ AppSchema.Project = new SimpleSchema({
 Projects = new Meteor.Collection('projects');
 Projects.attachSchema(AppSchema.Project);
 
-Projects.simpleSchema().messages(
-{
+AppSchema.Project.messages({
 	"regEx id": "Project IDs should be made up of digits and periods, e.g. 123.456",
+});
+
+AppSchema.ProjectElement = new SimpleSchema({
+	id: {
+		type: Object,
+		label: "Element ID",
+		unique: true,
+	},
+	"id.prefix": {
+		type: String,
+		label: "Element Prefix",
+		regEx: /^[0-9]{3}$/,
+	},
+	"id.project": {
+		type: String,
+		label: "Project ID",
+		regEx: projectIdRegex,
+	},
+	description: {
+		type: String,
+		label: "Description",
+		max: 100,
+	},
+	estimate: {
+		type: Object,
+		label: "Estimates",
+	},
+	"estimate.totalSales": {
+		type: Number,
+		label: "Total Sales",
+		decimal: true,
+		min: 0,
+	},
+	"estimate.totalSqFt": {
+		type: Number,
+		label: "Total Square Feet",
+		decimal: true,
+		min: 0,
+	},
+	actual: {
+		type: Object,
+		label: "Actual",
+	},
+	"actual.totalSales": {
+		type: Number,
+		label: "Total Sales",
+		decimal: true,
+		min: 0,
+	},
+	"actual.totalSqFt": {
+		type: Number,
+		label: "Total Square Feet",
+		decimal: true,
+		min: 0,
+	},
+	estimatedPourCount: {
+		type: Number,
+		label: "Estimated Number of Pours",
+		min: 0,
+	},
+	estimatedPieceCount: {
+		type: Number,
+		label: "Estimated Number of Pieces",
+		min: 0,
+	},
+	laborEntry: {
+		type: String,
+		label: "Labor Entry Style",
+		allowedValues: ["element", "piece"],
+		autoform: {
+			options: [
+				{ label: "By Element", value: "element" },
+				{ label: "By Piece", value: "piece" },
+			],
+		},
+	},
+});
+
+ProjectElements = new Meteor.Collection('projectElements');
+ProjectElements.attachSchema(AppSchema.ProjectElement)
+
+AppSchema.ProjectElement.messages({
+	"regEx id.prefix": "Project prefixes should be a three digit number.",
+	"regEx id.project": "Project IDs should be made up of digits and periods, e.g. 123.456",
 });
