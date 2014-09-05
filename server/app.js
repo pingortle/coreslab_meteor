@@ -60,22 +60,47 @@ Meteor.startup(function() {
 			{
 				id: "010.017",
 				description: "Southwest PowerPool Ops Center/Parking Garage",
+				customer: "Jimmy Dean Baked Beans Inc.",
 				status: "sold",
+				estimatedPourCount: 10,
+				estimatedLoads: {
+					legal: 1,
+					permit: 2,
+					escort: 3,
+				},
 			},
 			{
 				id: "012.002",
 				description: "Valley View Gym",
 				status: "sold",
+				estimatedPourCount: 10,
+				estimatedLoads: {
+					legal: 1,
+					permit: 2,
+					escort: 3,
+				},
 			},
 			{
 				id: "012.018",
 				description: "Calico Rock Addition",
 				status: "sold",
+				estimatedPourCount: 4,
+				estimatedLoads: {
+					legal: 1,
+					permit: 1,
+					escort: 1,
+				},
 			},
 			{
 				id: "012.014",
 				description: "Brookland High School Addition",
 				status: "sold",
+				estimatedPourCount: 90,
+				estimatedLoads: {
+					legal: 0,
+					permit: 0,
+					escort: 0,
+				},
 			},
 		];
 		_.each(projects, function(x) {
