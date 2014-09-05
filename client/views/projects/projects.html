@@ -42,22 +42,28 @@
 	<div class="panel-body">
 		<div class="well">
 			<dl class="dl-horizontal">
-				{{#if customer.name}}
-				<dt>Customer:</dt><dd>{{customer.name}}</dd>
+				{{#if customer}}
+				<dt>Customer:</dt><dd>{{customer}}</dd>
 				{{/if}}
-				<dt>Status:</dt><dd>{{status}}</dd>
-				<dt>Date Entered:</dt><dd>mm/dd/yy</dd>
-				<dt>Date Completed:</dt><dd>??/??/??</dd>
-				<dt>Pours:</dt>
+				<dt>Status</dt><dd>{{status}}</dd>
+				<dt>Est. Total Pours</dt><dd>{{estimatedPourCount}}</dd>
+				<dt>Date Entered</dt><dd>{{createdAt}}</dd>
+				<dt>Date Completed</dt>
 				<dd>
-					<dl>
-					{{#each pours}}
-						<dt>Men:</dt><dd>{{men}}</dd>
-						<dt>Start:</dt><dd>{{start}}</dd>
-						<dt>End:</dt><dd>{{end}}</dd>
-					{{/each}}
-					</dl>
+				{{#if completedAt}}
+					{{completedAt}}
+				{{else}}
+					??/??/??
+				{{/if}}
 				</dd>
+			</dl>
+			<h4>Estimated Loads</h4>
+			<dl class="dl-horizontal">
+				{{#with estimatedLoads}}
+				<dt>Truckloads Legal</dt><dd>{{legal}}</dd>
+				<dt>Truckloads Permit</dt><dd>{{permit}}</dd>
+				<dt>Truckloads Escort</dt><dd>{{escort}}</dd>
+				{{/with}}
 			</dl>
 		</div>
 	</div>
