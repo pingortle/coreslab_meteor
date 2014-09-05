@@ -203,6 +203,14 @@ AppSchema.Project = new SimpleSchema(_.extend(
 
 Projects = new Meteor.Collection('projects');
 Projects.attachSchema(AppSchema.Project);
+var isSuper = function (userId) {
+	return userId && Roles.userIsInRole(userId, ['super']);
+};
+Projects.allow({
+	insert: isSuper,
+	update: isSuper,
+	remove: isSuper,
+});
 
 AppSchema.Project.messages({
 	"regEx id": "Project IDs should be made up of digits and periods, e.g. 123.456",
