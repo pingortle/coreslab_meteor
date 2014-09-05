@@ -116,7 +116,7 @@ var projectElementSchema = {
 AppSchema.ProjectElement = new SimpleSchema(projectElementSchema);
 
 ProjectElements = new Meteor.Collection('projectElements');
-ProjectElements.attachSchema(AppSchema.ProjectElement)
+ProjectElements.attachSchema(AppSchema.ProjectElement);
 
 AppSchema.ProjectElement.messages({
 	"regEx id": "Element IDs should be a three digit number.",
