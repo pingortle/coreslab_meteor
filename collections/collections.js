@@ -1,5 +1,14 @@
 AppSchema = {};
 
+var toListSchema = function(schema, listName) {
+	return _.reduce(
+		_.zip(_.keys(schema), _.values(schema)),
+		function (acc, next) {
+			return (acc[listName + ".$." + next[0]] = next[1]) && acc;
+		},
+		{});
+};
+
 AppSchema.Workflow = new SimpleSchema({
 	slug: {
 		type: String,
@@ -33,14 +42,94 @@ AppSchema.Workflow = new SimpleSchema({
 Workflows = new Meteor.Collection('workflows');
 Workflows.attachSchema(AppSchema.Workflow);
 
+var projectElementSchema = {
+	id: {
+		type: Object,
+		label: "Element ID",
+		unique: true,
+	},
+	"id": {
+		type: String,
+		label: "Element Prefix",
+		regEx: /^[0-9]{3}$/,
+	},
+	description: {
+		type: String,
+		label: "Description",
+		max: 100,
+	},
+	estimate: {
+		type: Object,
+		label: "Estimates",
+	},
+	"estimate.totalSales": {
+		type: Number,
+		label: "Total Sales",
+		decimal: true,
+		min: 0,
+	},
+	"estimate.totalSqFt": {
+		type: Number,
+		label: "Total Square Feet",
+		decimal: true,
+		min: 0,
+	},
+	actual: {
+		type: Object,
+		label: "Actual",
+		optional: true,
+	},
+	"actual.totalSales": {
+		type: Number,
+		label: "Total Sales",
+		decimal: true,
+		min: 0,
+	},
+	"actual.totalSqFt": {
+		type: Number,
+		label: "Total Square Feet",
+		decimal: true,
+		min: 0,
+	},
+	estimatedPourCount: {
+		type: Number,
+		label: "Estimated Number of Pours",
+		min: 0,
+	},
+	estimatedPieceCount: {
+		type: Number,
+		label: "Estimated Number of Pieces",
+		min: 0,
+	},
+	laborEntry: {
+		type: String,
+		label: "Labor Entry Style",
+		allowedValues: ["element", "piece"],
+		autoform: {
+			options: [
+				{ label: "By Element", value: "element" },
+				{ label: "By Piece", value: "piece" },
+			],
+		},
+	},
+};
+AppSchema.ProjectElement = new SimpleSchema(projectElementSchema);
+
+ProjectElements = new Meteor.Collection('projectElements');
+ProjectElements.attachSchema(AppSchema.ProjectElement);
+
+AppSchema.ProjectElement.messages({
+	"regEx id": "Element IDs should be a three digit number.",
+});
+
 var projectStatusAllowedVals = ["sold", "cancelled", "pending"];
 var projectIdRegex = /^[0-9]{3}\.[0-9]{3}$/;
 
-AppSchema.Project = new SimpleSchema({
+var projectSchema = {
 	id: {
 		type: String,
 		label: "Project",
-		regEx: /^[0-9]{3}\.[0-9]{3}$/,
+		regEx: projectIdRegex,
 		index: true,
 		unique: true,
 	},
@@ -90,6 +179,11 @@ AppSchema.Project = new SimpleSchema({
 		min: 0,
 	},
 
+	elements: {
+		type: [Object],
+		label: "Project Elements",
+	},
+
 	createdAt: {
 		type: Date,
 		autoValue: function() {
@@ -102,12 +196,25 @@ AppSchema.Project = new SimpleSchema({
 			}
 		}
 	},
-});
+};
+
+AppSchema.Project = new SimpleSchema(_.extend(
+	projectSchema,
+	toListSchema(projectElementSchema, 'elements')));
 
 Projects = new Meteor.Collection('projects');
 Projects.attachSchema(AppSchema.Project);
-
-Projects.simpleSchema().messages(
-{
-	"regEx id": "Project IDs should be made up of digits and periods, e.g. 123.456",
+var isSuper = function (userId) {
+	return userId && Roles.userIsInRole(userId, ['super']);
+};
+Projects.allow({
+	insert: isSuper,
+	update: isSuper,
+	remove: isSuper,
 });
+
+AppSchema.Project.messages({
+	"regEx id": "Project IDs should be made up of digits and periods, e.g. 123.456",
+	"regEx elements.$.id": "Element IDs should be a three digit number.",
+});
+

@@ -68,6 +68,7 @@ Meteor.startup(function() {
 					permit: 2,
 					escort: 3,
 				},
+				elements: [],
 			},
 			{
 				id: "012.002",
@@ -79,6 +80,7 @@ Meteor.startup(function() {
 					permit: 2,
 					escort: 3,
 				},
+				elements: [],
 			},
 			{
 				id: "012.018",
@@ -90,6 +92,7 @@ Meteor.startup(function() {
 					permit: 1,
 					escort: 1,
 				},
+				elements: [],
 			},
 			{
 				id: "012.014",
@@ -101,6 +104,7 @@ Meteor.startup(function() {
 					permit: 0,
 					escort: 0,
 				},
+				elements: [],
 			},
 		];
 		_.each(projects, function(x) {
