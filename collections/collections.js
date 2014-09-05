@@ -1,5 +1,14 @@
 AppSchema = {};
 
+var toListSchema = function(schema, listName) {
+	return _.reduce(
+		_.zip(_.keys(schema), _.values(schema)),
+		function (acc, next) {
+			return (acc[listName + ".$." + next[0]] = next[1]) && acc;
+		},
+		{});
+};
+
 AppSchema.Workflow = new SimpleSchema({
 	slug: {
 		type: String,
@@ -33,99 +42,16 @@ AppSchema.Workflow = new SimpleSchema({
 Workflows = new Meteor.Collection('workflows');
 Workflows.attachSchema(AppSchema.Workflow);
 
-var projectStatusAllowedVals = ["sold", "cancelled", "pending"];
-var projectIdRegex = /^[0-9]{3}\.[0-9]{3}$/;
-
-AppSchema.Project = new SimpleSchema({
-	id: {
-		type: String,
-		label: "Project",
-		regEx: projectIdRegex,
-		index: true,
-		unique: true,
-	},
-	description: {
-		type: String,
-		label: "Description",
-		max: 100,
-	},
-	customer: {
-		type: String,
-		label: "Customer",
-		max: 100,
-		optional: true,
-	},
-	status: {
-		type: String,
-		label: "Status",
-		allowedValues: projectStatusAllowedVals,
-		autoform: {
-			options: _.map(projectStatusAllowedVals, function(val) {
-					return { label: val.charAt(0).toUpperCase() + val.slice(1), value: val };
-				}),
-		},
-	},
-	estimatedPourCount: {
-		type: Number,
-		label: "Estimated Total Pours",
-		min: 1,
-	},
-	estimatedLoads: {
-		type: Object,
-		label: "Estimated Loads",
-	},
-	"estimatedLoads.legal": {
-		type: Number,
-		label: "Truckloads Legal",
-		min: 0,
-	},
-	"estimatedLoads.permit": {
-		type: Number,
-		label: "Truckloads Permit",
-		min: 0,
-	},
-	"estimatedLoads.escort": {
-		type: Number,
-		label: "Truckloads Escort",
-		min: 0,
-	},
-
-	createdAt: {
-		type: Date,
-		autoValue: function() {
-			if (this.isInsert) {
-				return new Date;
-			} else if (this.isUpsert) {
-				return { $setOnInsert: new Date };
-			} else {
-				this.unset();
-			}
-		}
-	},
-});
-
-Projects = new Meteor.Collection('projects');
-Projects.attachSchema(AppSchema.Project);
-
-AppSchema.Project.messages({
-	"regEx id": "Project IDs should be made up of digits and periods, e.g. 123.456",
-});
-
-AppSchema.ProjectElement = new SimpleSchema({
+var projectElementSchema = {
 	id: {
 		type: Object,
 		label: "Element ID",
 		unique: true,
 	},
-	"id.prefix": {
+	"id": {
 		type: String,
 		label: "Element Prefix",
 		regEx: /^[0-9]{3}$/,
-	},
-	"id.project": {
-		type: String,
-		label: "Project ID",
-		regEx: projectIdRegex,
 	},
 	description: {
 		type: String,
@@ -185,12 +111,100 @@ AppSchema.ProjectElement = new SimpleSchema({
 			],
 		},
 	},
-});
+};
+AppSchema.ProjectElement = new SimpleSchema(projectElementSchema);
 
 ProjectElements = new Meteor.Collection('projectElements');
 ProjectElements.attachSchema(AppSchema.ProjectElement)
 
 AppSchema.ProjectElement.messages({
-	"regEx id.prefix": "Project prefixes should be a three digit number.",
-	"regEx id.project": "Project IDs should be made up of digits and periods, e.g. 123.456",
+	"regEx elements.$.id": "Element IDs should be a three digit number.",
 });
+
+var projectStatusAllowedVals = ["sold", "cancelled", "pending"];
+var projectIdRegex = /^[0-9]{3}\.[0-9]{3}$/;
+
+var projectSchema = {
+	id: {
+		type: String,
+		label: "Project",
+		regEx: projectIdRegex,
+		index: true,
+		unique: true,
+	},
+	description: {
+		type: String,
+		label: "Description",
+		max: 100,
+	},
+	customer: {
+		type: String,
+		label: "Customer",
+		max: 100,
+		optional: true,
+	},
+	status: {
+		type: String,
+		label: "Status",
+		allowedValues: projectStatusAllowedVals,
+		autoform: {
+			options: _.map(projectStatusAllowedVals, function(val) {
+					return { label: val.charAt(0).toUpperCase() + val.slice(1), value: val };
+				}),
+		},
+	},
+	estimatedPourCount: {
+		type: Number,
+		label: "Estimated Total Pours",
+		min: 1,
+	},
+	estimatedLoads: {
+		type: Object,
+		label: "Estimated Loads",
+	},
+	"estimatedLoads.legal": {
+		type: Number,
+		label: "Truckloads Legal",
+		min: 0,
+	},
+	"estimatedLoads.permit": {
+		type: Number,
+		label: "Truckloads Permit",
+		min: 0,
+	},
+	"estimatedLoads.escort": {
+		type: Number,
+		label: "Truckloads Escort",
+		min: 0,
+	},
+
+	elements: {
+		type: [Object],
+		label: "Project Elements",
+	},
+
+	createdAt: {
+		type: Date,
+		autoValue: function() {
+			if (this.isInsert) {
+				return new Date;
+			} else if (this.isUpsert) {
+				return { $setOnInsert: new Date };
+			} else {
+				this.unset();
+			}
+		}
+	},
+};
+
+AppSchema.Project = new SimpleSchema(_.extend(
+	projectSchema,
+	toListSchema(projectElementSchema, 'elements')));
+
+Projects = new Meteor.Collection('projects');
+Projects.attachSchema(AppSchema.Project);
+
+AppSchema.Project.messages({
+	"regEx id": "Project IDs should be made up of digits and periods, e.g. 123.456",
+});
+
