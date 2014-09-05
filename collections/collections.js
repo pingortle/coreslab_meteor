@@ -118,7 +118,7 @@ ProjectElements = new Meteor.Collection('projectElements');
 ProjectElements.attachSchema(AppSchema.ProjectElement)
 
 AppSchema.ProjectElement.messages({
-	"regEx elements.$.id": "Element IDs should be a three digit number.",
+	"regEx id": "Element IDs should be a three digit number.",
 });
 
 var projectStatusAllowedVals = ["sold", "cancelled", "pending"];
@@ -214,5 +214,6 @@ Projects.allow({
 
 AppSchema.Project.messages({
 	"regEx id": "Project IDs should be made up of digits and periods, e.g. 123.456",
+	"regEx elements.$.id": "Element IDs should be a three digit number.",
 });
 
