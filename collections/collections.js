@@ -77,6 +77,7 @@ var projectElementSchema = {
 	actual: {
 		type: Object,
 		label: "Actual",
+		optional: true,
 	},
 	"actual.totalSales": {
 		type: Number,
