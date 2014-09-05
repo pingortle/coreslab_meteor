@@ -53,6 +53,7 @@ AppSchema.Project = new SimpleSchema({
 		type: String,
 		label: "Customer",
 		max: 100,
+		optional: true,
 	},
 	status: {
 		type: String,
