@@ -213,3 +213,19 @@ AppSchema.Project.messages({
 	"regEx elements.$.id": "Element IDs should be a three digit number.",
 });
 
+AppSchema.Piece = new SimpleSchema({
+	controlNumber: {
+		type: String,
+		regEx: /^[0-9]{3}$/,
+		index: true,
+		unique: true,
+	},
+	mark: {
+		type: String,
+	},
+	projectElementID: projectElementSchema.id,
+	projectID: projectSchema.id,
+});
+
+Pieces = new Meteor.Collection('pieces');
+Pieces.attachSchema(AppSchema.Piece);
