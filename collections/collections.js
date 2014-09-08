@@ -44,11 +44,6 @@ Workflows.attachSchema(AppSchema.Workflow);
 
 var projectElementSchema = {
 	id: {
-		type: Object,
-		label: "Element ID",
-		unique: true,
-	},
-	"id": {
 		type: String,
 		label: "Element Prefix",
 		regEx: /^[0-9]{3}$/,
@@ -218,3 +213,58 @@ AppSchema.Project.messages({
 	"regEx elements.$.id": "Element IDs should be a three digit number.",
 });
 
+AppSchema.Piece = new SimpleSchema({
+	controlNumber: {
+		type: String,
+		regEx: /^[0-9]{3}$/,
+		index: true,
+		unique: true,
+	},
+	mark: {
+		type: String,
+	},
+	projectElementID: projectElementSchema.id,
+	projectID: projectSchema.id,
+});
+
+Pieces = new Meteor.Collection('pieces');
+Pieces.attachSchema(AppSchema.Piece);
+
+AppSchema.Bed = new SimpleSchema({
+	name: {
+		type: String,
+	},
+	formLength: {
+		type: String,
+	},
+	strandLength: {
+		type: String,
+	},
+	isActive: {
+		type: Boolean,
+	},
+});
+
+Beds = new Meteor.Collection('beds');
+Beds.attachSchema(AppSchema.Bed);
+
+AppSchema.ProductLine = new SimpleSchema({
+	id: {
+		type: String,
+	},
+	category: {
+		type: String,
+	},
+	description: {
+		type: String,
+	},
+	unitType: {
+		type: String,
+	},
+	isActive: {
+		type: Boolean,
+	}
+});
+
+ProductLines = new Meteor.Collection('productLines');
+ProductLines.attachSchema(AppSchema.ProductLine);
