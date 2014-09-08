@@ -44,11 +44,6 @@ Workflows.attachSchema(AppSchema.Workflow);
 
 var projectElementSchema = {
 	id: {
-		type: Object,
-		label: "Element ID",
-		unique: true,
-	},
-	"id": {
 		type: String,
 		label: "Element Prefix",
 		regEx: /^[0-9]{3}$/,
