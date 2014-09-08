@@ -247,3 +247,24 @@ AppSchema.Bed = new SimpleSchema({
 
 Beds = new Meteor.Collection('beds');
 Beds.attachSchema(AppSchema.Bed);
+
+AppSchema.ProductLine = new SimpleSchema({
+	id: {
+		type: String,
+	},
+	category: {
+		type: String,
+	},
+	description: {
+		type: String,
+	},
+	unitType: {
+		type: String,
+	},
+	isActive: {
+		type: Boolean,
+	}
+});
+
+ProductLines = new Meteor.Collection('productLines');
+ProductLines.attachSchema(AppSchema.ProductLine);
