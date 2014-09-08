@@ -229,3 +229,21 @@ AppSchema.Piece = new SimpleSchema({
 
 Pieces = new Meteor.Collection('pieces');
 Pieces.attachSchema(AppSchema.Piece);
+
+AppSchema.Bed = new SimpleSchema({
+	name: {
+		type: String,
+	},
+	formLength: {
+		type: String,
+	},
+	strandLength: {
+		type: String,
+	},
+	isActive: {
+		type: Boolean,
+	},
+});
+
+Beds = new Meteor.Collection('beds');
+Beds.attachSchema(AppSchema.Bed);
