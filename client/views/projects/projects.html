@@ -72,5 +72,76 @@
 </template>
 
 <template name="new_project">
-{{> quickForm collection="Projects" id="new_project_form" type="insert" omitFields="createdAt"}}
+{{#autoForm collection="Projects" id="new_project_form" type="insert"}}
+<fieldset>
+	{{> afQuickField name='id'}}
+	{{> afQuickField name='description'}}
+	{{> afQuickField name='customer'}}
+	{{> afQuickField name='status'}}
+	{{> afQuickField name='estimatedPourCount'}}
+	{{> afQuickField name='estimatedLoads'}}
+	{{> afArrayField name='elements' template="project_elements" omitFields="elements.$.id"}}
+	<button type="submit" class="btn btn-primary">Submit</button>
+</fieldset>
+{{/autoForm}}
+</template>
+
+<template name="afArrayField_project_elements">
+	<div class="panel panel-default">
+		<div class="panel-heading">{{afFieldLabelText name=this.atts.name}}</div>
+		{{#if afFieldIsInvalid name=this.atts.name}}
+		<div class="panel-body has-error">
+			<span class="help-block">{{{afFieldMessage name=this.atts.name}}}</span>
+		</div>
+		{{/if}}
+		<ul class="list-group">
+			{{#afEachArrayItem name=this.atts.name minCount=this.atts.minCount maxCount=this.atts.maxCount}}
+			<li class="list-group-item autoform-array-item">
+				<div class="media">
+					{{#if afArrayFieldHasMoreThanMinimum name=../atts.name minCount=../atts.minCount maxCount=../atts.maxCount}}
+					<button class="btn btn-primary autoform-remove-item pull-left"><span class="glyphicon glyphicon-minus"></span></button>
+					{{/if}}
+					<div class="media-body">
+						{{> afObjectField name=this.name label=false options="auto" fields=../atts.fields omitFields=../atts.omitFields template="project_elements"}}
+					</div>
+				</div>
+			</li>
+			{{/afEachArrayItem}}
+			{{#if afArrayFieldHasLessThanMaximum name=this.atts.name minCount=this.atts.minCount maxCount=this.atts.maxCount}}
+			<li class="list-group-item">
+				<button class="btn btn-primary autoform-add-item" data-autoform-field="{{this.atts.name}}" data-autoform-minCount="{{this.atts.minCount}}" data-autoform-maxCount="{{this.atts.maxCount}}"><span class="glyphicon glyphicon-plus"></span></button>
+			</li>
+			{{/if}}
+		</ul>
+	</div>
+</template>
+
+<template name="afObjectField_project_elements">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">{{afFieldLabelText name=this.atts.name}}</h3>
+		</div>
+		<div class="panel-body">
+			{{#if afFieldIsInvalid name=this.atts.name}}
+			<span class="help-block">{{{afFieldMessage name=this.atts.name}}}</span>
+			{{/if}}
+			{{> project_element_input ctx=this}}
+			{{> afQuickFields name=this.atts.name fields=this.atts.fields omitFields=this.atts.omitFields}}
+		</div>
+	</div>
+</template>
+
+<template name="project_element_input">
+	<div class="form-group {{#if afFieldIsInvalid name=elementId}}has-error{{/if}}">
+		{{> afFieldLabel name=elementId}}
+		{{#afFieldSelect name=elementId class="project-element-picker"}}
+			<option value="">Please Select an Element</option>
+			{{#each allElements}}
+			<option value={{id}}>{{id}} - {{description}}</option>
+			{{/each}}
+		{{/afFieldSelect}}
+		{{#if afFieldIsInvalid name=elementId}}
+				<span class="help-block">{{{afFieldMessage name=elementId}}}</span>
+		{{/if}}
+	</div>
 </template>

@@ -189,7 +189,10 @@ var projectSchema = {
 			} else {
 				this.unset();
 			}
-		}
+		},
+		autoform: {
+			omit: true,
+		},
 	},
 };
 
@@ -202,11 +205,6 @@ Projects.attachSchema(AppSchema.Project);
 var isSuper = function (userId) {
 	return userId && Roles.userIsInRole(userId, ['super']);
 };
-Projects.allow({
-	insert: isSuper,
-	update: isSuper,
-	remove: isSuper,
-});
 
 AppSchema.Project.messages({
 	"regEx id": "Project IDs should be made up of digits and periods, e.g. 123.456",
@@ -251,20 +249,38 @@ Beds.attachSchema(AppSchema.Bed);
 AppSchema.ProductLine = new SimpleSchema({
 	id: {
 		type: String,
+		label: "Product Code",
+		regEx: /^[0-9]{3}$/,
+		index: true,
+		unique: true,
 	},
 	category: {
 		type: String,
+		label: "Category",
 	},
 	description: {
 		type: String,
+		label: "Description",
 	},
 	unitType: {
 		type: String,
+		label: "Unit of Measure",
+		allowedValues: ["ft", "sqft"],
 	},
 	isActive: {
 		type: Boolean,
+		label: "Active",
+		defaultValue: true,
 	}
 });
 
 ProductLines = new Meteor.Collection('productLines');
 ProductLines.attachSchema(AppSchema.ProductLine);
+
+_.each([Projects, ProjectElements, ProductLines], function(x) {
+	x.allow({
+	insert: isSuper,
+	update: isSuper,
+	remove: isSuper,
+	});
+});
