@@ -33,3 +33,8 @@ Meteor.publish('projectElements', function() {
 	if (this.userId)
 		return ProjectElements.find();
 });
+
+Meteor.publish('productLines', function() {
+	if (this.userId)
+		return ProductLines.find({isActive: true});
+});

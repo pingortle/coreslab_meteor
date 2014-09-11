@@ -251,6 +251,8 @@ AppSchema.ProductLine = new SimpleSchema({
 		type: String,
 		label: "Product Code",
 		regEx: /^[0-9]{3}$/,
+		index: true,
+		unique: true,
 	},
 	category: {
 		type: String,
@@ -275,7 +277,7 @@ AppSchema.ProductLine = new SimpleSchema({
 ProductLines = new Meteor.Collection('productLines');
 ProductLines.attachSchema(AppSchema.ProductLine);
 
-_.each([Projects, ProjectElements], function(x) {
+_.each([Projects, ProjectElements, ProductLines], function(x) {
 	x.allow({
 	insert: isSuper,
 	update: isSuper,

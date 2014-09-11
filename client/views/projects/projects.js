@@ -9,19 +9,20 @@ Template.projects.events({
 Template.new_project.events({
 	'change select.project-element-picker': function(event, template) {
 		var id = event.target.value;
-		var element = ProjectElements.findOne({id: id});
+		var element = ProductLines.findOne({id: id});
 
 		var arrayIndex = event.target.dataset.schemaKey.replace('.id', '');
 		var data = template.$('[data-schema-key^="' + arrayIndex + '"]:not([data-schema-key$=".id"])');
 		_.each(data, function(x) {
 			var key = x.dataset.schemaKey.replace(/^elements.[0-9]+./, '');
-			x.value = (element && element[key]) || "";
+      if (element && element[key])
+        x.value = element[key];
 		});
 	},
 });
 
 Template.project_element_input.allElements = function() {
-	return ProjectElements.find();
+	return ProductLines.find();
 };
 
 Template.project_element_input.elementId = function(element) {
