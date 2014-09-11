@@ -137,7 +137,7 @@
 		{{#afFieldSelect name=elementId class="project-element-picker"}}
 			<option value="">Please Select an Element</option>
 			{{#each allElements}}
-			<option value={{id}}>{{id}}</option>
+			<option value={{id}}>{{id}} - {{description}}</option>
 			{{/each}}
 		{{/afFieldSelect}}
 		{{#if afFieldIsInvalid name=elementId}}
