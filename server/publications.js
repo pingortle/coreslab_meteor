@@ -28,3 +28,8 @@ Meteor.publish('projects', function() {
 	if (this.userId)
 		return Projects.find();
 });
+
+Meteor.publish('projectElements', function() {
+	if (this.userId)
+		return ProjectElements.find();
+});

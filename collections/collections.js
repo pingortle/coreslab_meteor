@@ -189,7 +189,10 @@ var projectSchema = {
 			} else {
 				this.unset();
 			}
-		}
+		},
+		autoform: {
+			omit: true,
+		},
 	},
 };
 
@@ -202,11 +205,6 @@ Projects.attachSchema(AppSchema.Project);
 var isSuper = function (userId) {
 	return userId && Roles.userIsInRole(userId, ['super']);
 };
-Projects.allow({
-	insert: isSuper,
-	update: isSuper,
-	remove: isSuper,
-});
 
 AppSchema.Project.messages({
 	"regEx id": "Project IDs should be made up of digits and periods, e.g. 123.456",
@@ -268,3 +266,11 @@ AppSchema.ProductLine = new SimpleSchema({
 
 ProductLines = new Meteor.Collection('productLines');
 ProductLines.attachSchema(AppSchema.ProductLine);
+
+_.each([Projects, ProjectElements], function(x) {
+	x.allow({
+	insert: isSuper,
+	update: isSuper,
+	remove: isSuper,
+	});
+});
