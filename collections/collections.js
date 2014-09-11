@@ -249,18 +249,26 @@ Beds.attachSchema(AppSchema.Bed);
 AppSchema.ProductLine = new SimpleSchema({
 	id: {
 		type: String,
+		label: "Product Code",
+		regEx: /^[0-9]{3}$/,
 	},
 	category: {
 		type: String,
+		label: "Category",
 	},
 	description: {
 		type: String,
+		label: "Description",
 	},
 	unitType: {
 		type: String,
+		label: "Unit of Measure",
+		allowedValues: ["ft", "sqft"],
 	},
 	isActive: {
 		type: Boolean,
+		label: "Active",
+		defaultValue: true,
 	}
 });
 
