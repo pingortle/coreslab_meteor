@@ -194,27 +194,31 @@ AppSchema.Project = new SimpleSchema(_.extend(
 
 Projects = new Meteor.Collection('projects');
 Projects.attachSchema(AppSchema.Project);
-var isSuper = function (userId) {
-	return userId && Roles.userIsInRole(userId, ['super']);
-};
+
+var projectMessages = {};
 
 AppSchema.Project.messages({
-	"regEx id": "Project IDs should be made up of digits and periods, e.g. 123.456",
-	"regEx elements.$.id": "Element IDs should be a three digit number.",
+	"regEx id": projectMessages.id = "Project IDs should be made up of digits and periods, e.g. 123.456",
+	"regEx elements.$.id": projectMessages.elementId = "Element Prefixes should be a three digit number.",
 });
 
 AppSchema.Piece = new SimpleSchema({
 	controlNumber: {
 		type: String,
-		regEx: /^[0-9]{3}$/,
-		index: true,
-		unique: true,
+		label: "Control Number",
+		index: false,
 	},
 	mark: {
 		type: String,
+		label: "Piece Mark",
 	},
 	projectElementID: projectElementSchema.id,
 	projectID: projectSchema.id,
+});
+
+AppSchema.Piece.messages({
+	"regEx projectID": projectMessages.id,
+	"regEx projectElementID": projectMessages.elementId,
 });
 
 Pieces = new Meteor.Collection('pieces');
@@ -223,15 +227,20 @@ Pieces.attachSchema(AppSchema.Piece);
 AppSchema.Bed = new SimpleSchema({
 	name: {
 		type: String,
+		label: "Name",
 	},
 	formLength: {
 		type: String,
+		label: "Form Length",
 	},
 	strandLength: {
 		type: String,
+		label: "Strand Length",
 	},
 	isActive: {
 		type: Boolean,
+		label: "Active",
+		defaultValue: true,
 	},
 });
 
@@ -263,13 +272,17 @@ AppSchema.ProductLine = new SimpleSchema({
 		type: Boolean,
 		label: "Active",
 		defaultValue: true,
-	}
+	},
 });
 
 ProductLines = new Meteor.Collection('productLines');
 ProductLines.attachSchema(AppSchema.ProductLine);
 
-_.each([Projects, ProductLines], function(x) {
+var isSuper = function (userId) {
+	return userId && Roles.userIsInRole(userId, ['super']);
+};
+
+_.each([Workflows, Projects, ProductLines, Beds, Pieces], function(x) {
 	x.allow({
 	insert: isSuper,
 	update: isSuper,
