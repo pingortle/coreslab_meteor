@@ -194,9 +194,6 @@ AppSchema.Project = new SimpleSchema(_.extend(
 
 Projects = new Meteor.Collection('projects');
 Projects.attachSchema(AppSchema.Project);
-var isSuper = function (userId) {
-	return userId && Roles.userIsInRole(userId, ['super']);
-};
 
 AppSchema.Project.messages({
 	"regEx id": "Project IDs should be made up of digits and periods, e.g. 123.456",
@@ -268,6 +265,10 @@ AppSchema.ProductLine = new SimpleSchema({
 
 ProductLines = new Meteor.Collection('productLines');
 ProductLines.attachSchema(AppSchema.ProductLine);
+
+var isSuper = function (userId) {
+	return userId && Roles.userIsInRole(userId, ['super']);
+};
 
 _.each([Projects, ProductLines], function(x) {
 	x.allow({
