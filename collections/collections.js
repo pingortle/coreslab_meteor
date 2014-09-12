@@ -108,14 +108,6 @@ var projectElementSchema = {
 		},
 	},
 };
-AppSchema.ProjectElement = new SimpleSchema(projectElementSchema);
-
-ProjectElements = new Meteor.Collection('projectElements');
-ProjectElements.attachSchema(AppSchema.ProjectElement);
-
-AppSchema.ProjectElement.messages({
-	"regEx id": "Element IDs should be a three digit number.",
-});
 
 var projectStatusAllowedVals = ["sold", "cancelled", "pending"];
 var projectIdRegex = /^[0-9]{3}\.[0-9]{3}$/;
@@ -277,7 +269,7 @@ AppSchema.ProductLine = new SimpleSchema({
 ProductLines = new Meteor.Collection('productLines');
 ProductLines.attachSchema(AppSchema.ProductLine);
 
-_.each([Projects, ProjectElements, ProductLines], function(x) {
+_.each([Projects, ProductLines], function(x) {
 	x.allow({
 	insert: isSuper,
 	update: isSuper,
