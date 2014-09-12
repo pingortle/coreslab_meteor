@@ -282,7 +282,7 @@ var isSuper = function (userId) {
 	return userId && Roles.userIsInRole(userId, ['super']);
 };
 
-_.each([Projects, ProductLines], function(x) {
+_.each([Workflows, Projects, ProductLines, Beds, Pieces], function(x) {
 	x.allow({
 	insert: isSuper,
 	update: isSuper,
