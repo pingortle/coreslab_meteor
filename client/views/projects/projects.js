@@ -7,7 +7,7 @@ Template.projects.events({
 });
 
 Template.new_project.events({
-	'change select.project-element-picker': function(event, template) {
+	'change select[data-schema-key^="elements."][data-schema-key$=".id"]': function(event, template) {
 		var id = event.target.value;
 		var element = ProductLines.findOne({id: id});
 
@@ -21,10 +21,12 @@ Template.new_project.events({
 	},
 });
 
-Template.project_element_input.allElements = function() {
-	return ProductLines.find();
+Template.afObjectField_project_elements.allElements = function() {
+	return [{ label: "Please select a product.", value: "" }].concat(ProductLines.find().map(function(x) {
+		return { label: x.id + " - " + x.description, value: x.id };
+	}));
 };
 
-Template.project_element_input.elementId = function(element) {
-	return element || this.ctx.atts.name + ".id";
+Template.afObjectField_project_elements.elementId = function(element) {
+	return element || this.atts.name + ".id";
 };
