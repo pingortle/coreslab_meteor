@@ -118,9 +118,6 @@
 
 <template name="afObjectField_project_elements">
 	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h3 class="panel-title">{{afFieldLabelText name=this.atts.name}}</h3>
-		</div>
 		<div class="panel-body">
 			{{#if afFieldIsInvalid name=this.atts.name}}
 			<span class="help-block">{{{afFieldMessage name=this.atts.name}}}</span>

@@ -45,7 +45,7 @@ Workflows.attachSchema(AppSchema.Workflow);
 var projectElementSchema = {
 	id: {
 		type: String,
-		label: "Element Prefix",
+		label: "Product Code",
 		regEx: /^[0-9]{3}$/,
 	},
 	description: {
@@ -65,7 +65,7 @@ var projectElementSchema = {
 	},
 	"estimate.totalSqFt": {
 		type: Number,
-		label: "Total Square Feet",
+		label: "Total Area (sqft)",
 		decimal: true,
 		min: 0,
 	},
@@ -115,14 +115,14 @@ var projectIdRegex = /^[0-9]{3}\.[0-9]{3}$/;
 var projectSchema = {
 	id: {
 		type: String,
-		label: "Project",
+		label: "Project Number",
 		regEx: projectIdRegex,
 		index: true,
 		unique: true,
 	},
 	description: {
 		type: String,
-		label: "Description",
+		label: "Project Name",
 		max: 100,
 	},
 	customer: {
@@ -199,21 +199,59 @@ var projectMessages = {};
 
 AppSchema.Project.messages({
 	"regEx id": projectMessages.id = "Project IDs should be made up of digits and periods, e.g. 123.456",
-	"regEx elements.$.id": projectMessages.elementId = "Element Prefixes should be a three digit number.",
+	"regEx elements.$.id": projectMessages.elementId = "Product Code should be a three digit number.",
 });
 
 AppSchema.Piece = new SimpleSchema({
+	projectID: projectSchema.id,
+	projectElementID: projectElementSchema.id,
+	mark: {
+		type: String,
+		label: "Piece Mark",
+	},
 	controlNumber: {
 		type: String,
 		label: "Control Number",
 		index: false,
 	},
-	mark: {
+	length: {
 		type: String,
-		label: "Piece Mark",
+		label: "Length (ft)",
 	},
-	projectElementID: projectElementSchema.id,
-	projectID: projectSchema.id,
+	width: {
+		type: String,
+		label: "Width (ft)",
+	},
+	depth: {
+		type: String,
+		label: "Depth (ft)",
+	},
+	height: {
+		type: String,
+		label: "Height (ft)",
+	},
+	weight: {
+		type: String,
+		label: "Weight (ft)"
+	},
+	concreteVolume: {
+		type: Object,
+		label: "Concrete Volume (cubic yds)"
+	},
+	"concreteVolume.face": {
+		type: String,
+		label: "Face",
+	},
+	"concreteVolume.back": {
+		type: String,
+		label: "Back",
+		optional: true,
+	},
+	approved: {
+		type: Boolean,
+		label: "Approved",
+		defaultValue: true,
+	},
 });
 
 AppSchema.Piece.messages({
@@ -231,11 +269,11 @@ AppSchema.Bed = new SimpleSchema({
 	},
 	formLength: {
 		type: String,
-		label: "Form Length",
+		label: "Form Length (ft)",
 	},
 	strandLength: {
 		type: String,
-		label: "Strand Length",
+		label: "Strand Length (ft)",
 	},
 	isActive: {
 		type: Boolean,
@@ -277,6 +315,9 @@ AppSchema.ProductLine = new SimpleSchema({
 
 ProductLines = new Meteor.Collection('productLines');
 ProductLines.attachSchema(AppSchema.ProductLine);
+AppSchema.ProductLine.messages({
+	"regEx id": "Product Code should be a three digit number."
+});
 
 var isSuper = function (userId) {
 	return userId && Roles.userIsInRole(userId, ['super']);
