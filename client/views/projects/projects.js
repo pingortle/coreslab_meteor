@@ -22,8 +22,8 @@ Template.new_project.events({
 });
 
 Template.afObjectField_project_elements.allElements = function() {
-	return [{ label: "Please select a product.", value: "" }].concat(ProductLines.find().map(function(x) {
-		return { label: x.id + " - " + x.description, value: x.id };
+	return [{ label: "Please select a product…", value: "" }].concat(ProductLines.find().map(function(x) {
+		return { label: x.id + "\t-\t" + x.description, value: x.id };
 	}));
 };
 
