@@ -82,7 +82,7 @@ var projectElementSchema = {
 	},
 	"actual.totalSqFt": {
 		type: Number,
-		label: "Total Square Feet",
+		label: "Total Area (sqft)",
 		decimal: true,
 		min: 0,
 	},

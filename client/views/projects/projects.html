@@ -43,7 +43,7 @@
 		<div class="well">
 			<dl class="dl-horizontal">
 				{{#if customer}}
-				<dt>Customer:</dt><dd>{{customer}}</dd>
+					<dt>Customer:</dt><dd>{{customer}}</dd>
 				{{/if}}
 				<dt>Status</dt><dd>{{status}}</dd>
 				<dt>Est. Total Pours</dt><dd>{{estimatedPourCount}}</dd>
@@ -57,6 +57,7 @@
 				{{/if}}
 				</dd>
 			</dl>
+
 			<h4>Estimated Loads</h4>
 			<dl class="dl-horizontal">
 				{{#with estimatedLoads}}
@@ -65,6 +66,25 @@
 				<dt>Truckloads Escort</dt><dd>{{escort}}</dd>
 				{{/with}}
 			</dl>
+
+			<h4>Elements</h4>
+			{{#each elements}}
+				<dl class="dl-horizontal">
+					<dt>Product Code</dt><dd>{{id}}</dd>
+					<dt>Description</dt><dd>{{description}}</dd>
+					<dt>Est. Total Sales</dt><dd>{{estimate.totalSales}}</dd>
+					<dt>Est. Total Area (sqft)</dt><dd>{{estimate.totalSqFt}}</dd>
+					{{#if actual}}
+						<dt>Actual Total Sales</dt><dd>{{actual.totalSales}}</dd>
+						<dt>Actual Total Area (sqft)</dt><dd>{{actual.totalSqFt}}</dd>
+					{{/if}}
+					<dt>Est. Number of Pours</dt><dd>{{estimatedPourCount}}</dd>
+					<dt>Est. Number of Pieces</dt><dd>{{estimatedPieceCount}}</dd>
+					<dt>Labor Entry Style</dt><dd>{{laborEntry}}</dd>
+					<dt><a href="{{pathFor 'new_piece' id=../id element=id}}">+ Add Piece to {{id}}</a></dt><dd></dd>
+				</dl>
+				<hr>
+			{{/each}}
 		</div>
 	</div>
 </div>
