@@ -25,8 +25,10 @@ Meteor.publish('workflows', function(allowed) {
 });
 
 Meteor.publish('projects', function() {
+	var options = { sort: { id: 1 } };
+
 	if (this.userId)
-		return Projects.find();
+		return Projects.find({}, options);
 });
 
 Meteor.publish('productLines', function() {
