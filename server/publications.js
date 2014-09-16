@@ -30,6 +30,8 @@ Meteor.publish('projects', function() {
 });
 
 Meteor.publish('productLines', function() {
+	var options = { sort: { id: 1 } };
+
 	if (this.userId)
-		return ProductLines.find({isActive: true});
+		return ProductLines.find({ isActive: true }, options);
 });
