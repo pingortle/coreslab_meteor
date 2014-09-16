@@ -122,23 +122,8 @@
 			{{#if afFieldIsInvalid name=this.atts.name}}
 			<span class="help-block">{{{afFieldMessage name=this.atts.name}}}</span>
 			{{/if}}
-			{{> project_element_input ctx=this}}
+			{{> afQuickField name=elementId options=allElements}}
 			{{> afQuickFields name=this.atts.name fields=this.atts.fields omitFields=this.atts.omitFields}}
 		</div>
-	</div>
-</template>
-
-<template name="project_element_input">
-	<div class="form-group {{#if afFieldIsInvalid name=elementId}}has-error{{/if}}">
-		{{> afFieldLabel name=elementId}}
-		{{#afFieldSelect name=elementId class="project-element-picker"}}
-			<option value="">Please Select an Element</option>
-			{{#each allElements}}
-			<option value={{id}}>{{id}} - {{description}}</option>
-			{{/each}}
-		{{/afFieldSelect}}
-		{{#if afFieldIsInvalid name=elementId}}
-				<span class="help-block">{{{afFieldMessage name=elementId}}}</span>
-		{{/if}}
 	</div>
 </template>
