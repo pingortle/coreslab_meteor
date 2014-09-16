@@ -28,5 +28,5 @@ Template.afObjectField_project_elements.allElements = function() {
 };
 
 Template.afObjectField_project_elements.elementId = function(element) {
-	return element || this.atts.name + ".id";
+	return (element || this.atts.name) + ".id";
 };
