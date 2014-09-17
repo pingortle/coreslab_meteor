@@ -1,10 +1,10 @@
 {
   "packages": {
     "accounts-ui-bootstrap-3": {},
-    "iron-router": {},
     "bootstrap3-sass": {},
     "roles": {},
     "fastclick": {},
-    "autoform": {}
+    "autoform": {},
+    "iron-router": {}
   }
 }
