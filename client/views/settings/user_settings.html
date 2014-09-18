@@ -3,9 +3,11 @@
 <ul>
 {{#each this}}
 	<li>
-	{{#each this.emails}}
-	{{this.address}}<br>
-	{{/each}}
+		<a href="{{pathFor 'user_authorization_settings' id=_id}}">
+		{{#each this.emails}}
+		{{this.address}}<br>
+		{{/each}}
+		</a>
 	</li>
 {{/each}}
 </ul>

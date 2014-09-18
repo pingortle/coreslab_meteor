@@ -1,3 +1,23 @@
+Meteor.users.allow({
+	update: function (userId, doc, fields, modifier) {
+		return userId && Roles.userIsInRole(userId, ['super']);
+	}
+});
+
+Meteor.methods({
+	setUserAuthorization: function(doc) {
+		if (!this.userId || !Roles.userIsInRole(this.userId, ['super']))
+			throw new Meteor.Error(403, 'Error 403: Not authorized');
+
+		// Important server-side check for security and data integrity
+		check(doc, AppSchema.Authorization);
+
+		var authDoc = _.omit(doc, ['userId']);
+
+		Meteor.users.update(doc.userId, { $set: { authorization: authDoc } });
+	}
+});
+
 Meteor.startup(function() {
 	if (Roles.getAllRoles().count() === 0) {
 		Roles.createRole("super");
