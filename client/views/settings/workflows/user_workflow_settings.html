@@ -1,0 +1,20 @@
+<template name='user_workflow_settings'>
+<ul class="list-group">
+{{#each userWorkflows user._id}}
+  <li class="list-group-item">
+  <button type="button" class="close remove-workflow" data-slug="{{slug}}">&times;</button>
+  {{name}}
+  </li>
+{{/each}}
+</ul>
+<select id="addWorkflowToUser">
+  <optgroup>
+    <option value="">Add a workflow to this user</option>
+  </optgroup>
+  <optgroup>
+  {{#each nonUserWorkflows user._id}}
+    <option value="{{slug}}">{{name}}</option>
+  {{/each}}
+  </optgroup>
+</select>
+</template>

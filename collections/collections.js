@@ -319,10 +319,6 @@ AppSchema.ProductLine.messages({
 	"regEx id": "Product Code should be a three digit number."
 });
 
-var isSuper = function (userId) {
-	return userId && Roles.userIsInRole(userId, ['super']);
-};
-
 var createAuthFunction = function (authorization, operation) {
 	return function(userId) {
 		var user = Meteor.users.findOne(userId);
