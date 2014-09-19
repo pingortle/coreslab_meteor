@@ -15,6 +15,18 @@ Meteor.methods({
 		var authDoc = _.omit(doc, ['userId']);
 
 		Meteor.users.update(doc.userId, { $set: { authorization: authDoc } });
+	},
+	addUserToRole: function(userId, role) {
+		if (!this.userId || !Roles.userIsInRole(this.userId, ['super']))
+			throw new Meteor.Error(403, 'Error 403: Not authorized');
+
+		Roles.addUsersToRoles(userId, [role]);
+	},
+	removeUserFromRole: function(userId, role) {
+		if (!this.userId || !Roles.userIsInRole(this.userId, ['super']))
+			throw new Meteor.Error(403, 'Error 403: Not authorized');
+
+		Roles.removeUsersFromRoles(userId, [role]);
 	}
 });
 

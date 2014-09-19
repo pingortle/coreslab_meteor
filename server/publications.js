@@ -1,10 +1,3 @@
-var roleArray = function(userId) {
-	var roles = Roles.getRolesForUser(this.userId) || [];
-	return roles.map(function(x) {
-		return x.name;
-	});
-}
-
 Meteor.publish('myAuthorizations', function() {
 	if (this.userId)
 		return Meteor.users.find(this.userId, { fields: { authorization: 1 } });
@@ -19,7 +12,7 @@ Meteor.publish('managedUsers', function(userId) {
 		this.ready();
 });
 
-Meteor.publish('workflows', function(allowed) {
+Meteor.publish('workflows', function() {
 	if (this.userId) {
 		if (Roles.userIsInRole(this.userId, ['super']))
 			return Workflows.find();

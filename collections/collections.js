@@ -31,6 +31,7 @@ AppSchema.Workflow = new SimpleSchema({
 		type: String,
 		label: "Action Link",
 		max: 200,
+		regEx: /^(?:\/[ \w-]+)+(?:\?[^#]*)?(?:#[\w]*)?$/,
 	},
 	"actionLinks.$.button_label": {
 		type: String,
@@ -319,10 +320,6 @@ AppSchema.ProductLine.messages({
 	"regEx id": "Product Code should be a three digit number."
 });
 
-var isSuper = function (userId) {
-	return userId && Roles.userIsInRole(userId, ['super']);
-};
-
 var createAuthFunction = function (authorization, operation) {
 	return function(userId) {
 		var user = Meteor.users.findOne(userId);
@@ -342,7 +339,7 @@ _.each(collectionListing, function(x) {
 		{}));
 });
 
-authSchemaDefinition = _.reduce(
+var authSchemaDefinition = _.reduce(
 	_.map(collectionListing,
 		function (x) { return x._name; }),
 	function (acc, n) {
