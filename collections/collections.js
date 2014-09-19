@@ -31,6 +31,7 @@ AppSchema.Workflow = new SimpleSchema({
 		type: String,
 		label: "Action Link",
 		max: 200,
+		regEx: /^(?:\/[ \w-]+)+(?:\?[^#]*)?(?:#[\w]*)?$/,
 	},
 	"actionLinks.$.button_label": {
 		type: String,
