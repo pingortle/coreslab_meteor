@@ -12,7 +12,7 @@ Meteor.publish('managedUsers', function(userId) {
 		this.ready();
 });
 
-Meteor.publish('workflows', function(allowed) {
+Meteor.publish('workflows', function() {
 	if (this.userId) {
 		if (Roles.userIsInRole(this.userId, ['super']))
 			return Workflows.find();
