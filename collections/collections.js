@@ -339,7 +339,7 @@ _.each(collectionListing, function(x) {
 		{}));
 });
 
-authSchemaDefinition = _.reduce(
+var authSchemaDefinition = _.reduce(
 	_.map(collectionListing,
 		function (x) { return x._name; }),
 	function (acc, n) {
