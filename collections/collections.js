@@ -323,10 +323,45 @@ var isSuper = function (userId) {
 	return userId && Roles.userIsInRole(userId, ['super']);
 };
 
-_.each([Workflows, Projects, ProductLines, Beds, Pieces], function(x) {
-	x.allow({
-	insert: isSuper,
-	update: isSuper,
-	remove: isSuper,
-	});
+var createAuthFunction = function (authorization, operation) {
+	return function(userId) {
+		var user = Meteor.users.findOne(userId);
+		var authObj = user.authorization && user.authorization[authorization];
+		return isSuper(userId) || (authObj && authObj[operation]);
+	};
+};
+
+var collectionListing = [Workflows, Projects, ProductLines, Beds, Pieces, Meteor.users];
+
+_.each(collectionListing, function(x) {
+	var name = x._name;
+	x.allow(_.reduce(["insert", "update", "remove"],
+		function(acc, n) {
+			return (acc[n] = createAuthFunction(name, n)) && acc;
+		},
+		{}));
 });
+
+authSchemaDefinition = _.reduce(
+	_.map(collectionListing,
+		function (x) { return x._name; }),
+	function (acc, n) {
+		acc[n] = { type: Object };
+		_.each(
+			_.map(["insert", "update", "remove"],
+				function(y) { return n + "." + y; }),
+			function(y) { acc[y] = { type: Boolean }});
+		return acc;
+	},
+	{});
+
+authSchemaDefinition = _.extend(authSchemaDefinition, {
+	userId: {
+		type: String,
+		autoform: {
+			omit: true,
+		}
+	}
+});
+
+AppSchema.Authorization = new SimpleSchema(authSchemaDefinition);

@@ -5,9 +5,16 @@ var roleArray = function(userId) {
 	});
 }
 
-Meteor.publish('managedUsers', function() {
+Meteor.publish('myAuthorizations', function() {
+	if (this.userId)
+		return Meteor.users.find(this.userId, { fields: { authorization: 1 } });
+	else
+		this.ready();
+});
+
+Meteor.publish('managedUsers', function(userId) {
 	if (Roles.userIsInRole(this.userId, ['super']))
-			return Meteor.users.find();
+			return Meteor.users.find(userId || {});
 	else
 		this.ready();
 });

@@ -1,0 +1,28 @@
+<template name="user_authorization_settings">
+{{#autoForm schema=authSchema id="authorizationForm" type="method" meteormethod="setUserAuthorization"}}
+  <fieldset>
+      {{> afFieldInput type="hidden" name="userId" value=_id}}
+      <table class="table">
+        <caption>Authorizations for {{username}}</caption>
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Permission</th>
+          </tr>
+        </thead>
+        <tbody>
+        {{#each afFieldNames omit="userId"}}
+          <tr>
+            <td>{{> afFieldLabel name=this}}</td>
+            <td>
+            {{#each authTypes this}}
+            {{> afFieldInput name=fieldName}}
+            {{/each}}
+            </td>
+          </tr>
+        {{/each}}
+        </tbody>
+      </table>
+    </fieldset>
+{{/autoForm}}
+</template>
