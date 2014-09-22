@@ -5,6 +5,8 @@
     "roles": {},
     "fastclick": {},
     "autoform": {},
-    "iron-router": {}
+    "iron-router": {},
+    "zones": {},
+    "kadira": {}
   }
 }
