@@ -323,7 +323,7 @@ AppSchema.ProductLine.messages({
 var createAuthFunction = function (authorization, operation) {
 	return function(userId) {
 		var user = Meteor.users.findOne(userId);
-		var authObj = user.authorization && user.authorization[authorization];
+		var authObj = user && user.authorization && user.authorization[authorization];
 		return isSuper(userId) || (authObj && authObj[operation]);
 	};
 };
