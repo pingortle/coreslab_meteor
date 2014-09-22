@@ -340,8 +340,7 @@ _.each(collectionListing, function(x) {
 });
 
 var authSchemaDefinition = _.reduce(
-	_.map(collectionListing,
-		function (x) { return x._name; }),
+	_.pluck(collectionListing, '_name'),
 	function (acc, n) {
 		acc[n] = { type: Object };
 		_.each(
