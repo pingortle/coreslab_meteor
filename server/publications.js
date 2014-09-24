@@ -39,9 +39,11 @@ Meteor.publish('projects', function() {
 // Pass a filter object describing which product lines are published.
 // Filter options:
 //   allowInactive (Boolean): Publish inactive as well as active?
-Meteor.publish('productLines', function() {
+Meteor.publish('productLines', function(filter) {
+	filter = filter || {};
 	var options = { sort: { id: 1 } };
+	var selector = filter.allowInactive ? {} : { isActive: true };
 
 	if (this.userId)
-		return ProductLines.find({ isActive: true }, options);
+		return ProductLines.find(selector, options);
 });
