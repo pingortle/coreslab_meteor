@@ -1,5 +1,10 @@
+// Docs for simple-schema @ https://atmospherejs.com/aldeed/simple-schema
+// Docs for autoform @ https://atmospherejs.com/aldeed/autoform
+
 AppSchema = {};
 
+// This converts a schema definition into list form.
+// DEPRECATED: newer versions of Simple Schema support nested schemas.
 var toListSchema = function(schema, listName) {
 	return _.reduce(
 		_.zip(_.keys(schema), _.values(schema)),

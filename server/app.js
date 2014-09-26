@@ -1,9 +1,12 @@
+// Super user can change users.
+// TODO: Decide if this is a good thing...?
 Meteor.users.allow({
 	update: function (userId, doc, fields, modifier) {
 		return userId && Roles.userIsInRole(userId, ['super']);
 	}
 });
 
+// Docs @ http://docs.meteor.com/#meteor_methods
 Meteor.methods({
 	setUserAuthorization: function(doc) {
 		if (!this.userId || !Roles.userIsInRole(this.userId, ['super']))
@@ -30,13 +33,21 @@ Meteor.methods({
 	}
 });
 
+var logDatabaseSeed = function(collection) {
+	console.log("Seeding " + collection._name + "...");
+};
+
+// Docs @ http://docs.meteor.com/#meteor_startup
 Meteor.startup(function() {
 	if (Roles.getAllRoles().count() === 0) {
 		Roles.createRole("super");
 		Roles.createRole("basic");
 	}
 
+	// Seed the DB with fake info.
+	// TODO: Delete/replace this stuff before going into production.
 	if (Workflows.find().count() === 0) {
+		logDatabaseSeed(Workflows);
 		var workflows = [
 			{
 				slug: "production",
@@ -88,6 +99,7 @@ Meteor.startup(function() {
 	}
 
 	if (Projects.find().count() === 0) {
+		logDatabaseSeed(Projects);
 		var projects = [
 			{
 				id: "010.017",

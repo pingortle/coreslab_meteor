@@ -1,3 +1,4 @@
+// Docs @ http://docs.meteor.com/#accounts_onlogin
 Accounts.onLogin(function(attempt) {
 	if (Meteor.users.find().count() === 1 && !Roles.userIsInRole(attempt.user._id, ["super"]))
 		Roles.addUsersToRoles(attempt.user._id, ["super"]);
