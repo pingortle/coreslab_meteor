@@ -35,6 +35,13 @@ Meteor.publish('projects', function() {
 		return Projects.find({}, options);
 });
 
+// Publish appropriate pieces for authenticated users.
+Meteor.publish('pieces', function() {
+	console.log("Found " + Pieces.find().count() + " many pieces...");
+	if (this.userId)
+		return Pieces.find();
+});
+
 // Publish collections with common filter options.
 _.each([ProductLines, Beds],
 
