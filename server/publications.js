@@ -35,28 +35,19 @@ Meteor.publish('projects', function() {
 		return Projects.find({}, options);
 });
 
-// Publish appropriate product lines for authenticated users.
-// Pass a filter object describing which product lines are published.
-// Filter options:
-//   allowInactive (Boolean): Publish inactive as well as active?
-Meteor.publish('productLines', function(filter) {
-	filter = filter || {};
-	var options = { sort: { id: 1 } };
-	var selector = filter.allowInactive ? {} : { isActive: true };
+// Publish collections with common filter options.
+_.each([ProductLines, Beds],
 
-	if (this.userId)
-		return ProductLines.find(selector, options);
-});
+	// Pass a filter object describing which items are published.
+	// Filter options:
+	//   allowInactive (Boolean): Publish inactive as well as active?
+	function(collection) {
+		Meteor.publish(collection._name, function(filter) {
+			filter = filter || {};
+			var options = { sort: { id: 1 } };
+			var selector = filter.allowInactive ? {} : { isActive: true };
 
-// Publish appropriate beds for authenticated users.
-// Pass a filter object describing which bes are published.
-// Filter options:
-//   allowInactive (Boolean): Publish inactive as well as active?
-Meteor.publish('beds', function(filter) {
-	filter = filter || {};
-	var options = { sort: { id: 1 } };
-	var selector = filter.allowInactive ? {} : { isActive: true };
-
-	if (this.userId)
-		return Beds.find(selector, options);
-});
+			if (this.userId)
+				return collection.find(selector, options);
+		});
+	});
