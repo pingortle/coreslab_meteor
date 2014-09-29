@@ -1,0 +1,36 @@
+<template name="ItemListing">
+<h1>{{title this}}</h1>
+<table class="table">
+  <thead>
+    <tr>
+    {{#each fields this}}
+      <th>{{labelFor this ..}}</th>
+    {{/each}}
+    </tr>
+  </thead>
+  <tbody>
+  {{#each cursor}}
+    <tr>
+    {{#each fields ..}}
+      <td>
+      {{#with dataFor this ..}}
+        {{#if isTextual this}}{{this}}{{/if}}
+        {{#if isBoolean this}}
+        <div class="circle {{#if this}}yes{{else}}no{{/if}}"></div>
+        {{/if}}
+        {{#if isArray this}}{{countOf this}}{{/if}}
+        {{#if isObject this}}{{> ItemListing_object objectKey=.. ctx=../../.. object=this}}{{/if}}
+      {{/with}}
+      </td>
+    {{/each}}
+    </tr>
+  {{/each}}
+  </tbody>
+</table>
+</template>
+
+<template name="ItemListing_object">
+{{#each keysFor objectKey ctx}}
+{{labelFor this ..}}: {{dataFor this ../object}}<br>
+{{/each}}
+</template>
