@@ -40,6 +40,7 @@ AppSchema.Workflow = new SimpleSchema({
 	},
 	actionLinks: {
 		type: [Object],
+		label: "Action Links",
 		maxCount: 10,
 		optional: true,
 	},
