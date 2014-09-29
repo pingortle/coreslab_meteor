@@ -47,3 +47,16 @@ Meteor.publish('productLines', function(filter) {
 	if (this.userId)
 		return ProductLines.find(selector, options);
 });
+
+// Publish appropriate beds for authenticated users.
+// Pass a filter object describing which bes are published.
+// Filter options:
+//   allowInactive (Boolean): Publish inactive as well as active?
+Meteor.publish('beds', function(filter) {
+	filter = filter || {};
+	var options = { sort: { id: 1 } };
+	var selector = filter.allowInactive ? {} : { isActive: true };
+
+	if (this.userId)
+		return Beds.find(selector, options);
+});
