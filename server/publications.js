@@ -50,11 +50,13 @@ _.each([ProductLines, Beds],
 	//   allowInactive (Boolean): Publish inactive as well as active?
 	function(collection) {
 		Meteor.publish(collection._name, function(filter) {
+			if (!this.userId)
+				return null;
+
 			filter = filter || {};
 			var options = { sort: { id: 1 } };
 			var selector = filter.allowInactive ? {} : { isActive: true };
 
-			if (this.userId)
-				return collection.find(selector, options);
+			return collection.find(selector, options);
 		});
 	});
