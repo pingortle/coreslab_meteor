@@ -54,6 +54,10 @@ _.each([ProductLines, Beds],
 				return null;
 
 			filter = filter || {};
+
+			if (filter.singleId)
+				return collection.find({ _id: filter.singleId });
+
 			var options = { sort: { id: 1 } };
 			var selector = filter.allowInactive ? {} : { isActive: true };
 
