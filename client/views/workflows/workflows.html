@@ -11,6 +11,10 @@
 </div>
 </template>
 
+<template name="workflows_listing">
+{{> ItemListing collection="Workflows" cursor=this}}
+</template>
+
 <template name="workflow_tab">
 <li class="{{CurrentSlugActive slug}}"><a href="{{SlugRoute '/workflows' slug}}">{{name}}</a></li>
 </template>

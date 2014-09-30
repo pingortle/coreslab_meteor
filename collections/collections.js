@@ -3,6 +3,17 @@
 
 AppSchema = {};
 
+// This should be a mapping from Collection._name to the name as displayed in the UI.
+AppSchema.DisplayNames = {};
+AppSchema.getDisplayName = function(collection) {
+	return AppSchema.DisplayNames[collection._name];
+};
+
+var addCollectionDisplayName = function(collection, name) {
+	var displayNames = AppSchema.DisplayNames;
+	displayNames[collection._name] = name;
+}
+
 // This converts a schema definition into list form.
 // DEPRECATED: newer versions of Simple Schema support nested schemas.
 var toListSchema = function(schema, listName) {
@@ -29,6 +40,7 @@ AppSchema.Workflow = new SimpleSchema({
 	},
 	actionLinks: {
 		type: [Object],
+		label: "Action Links",
 		maxCount: 10,
 		optional: true,
 	},
@@ -47,6 +59,7 @@ AppSchema.Workflow = new SimpleSchema({
 
 Workflows = new Meteor.Collection('workflows');
 Workflows.attachSchema(AppSchema.Workflow);
+addCollectionDisplayName(Workflows, "Workflows");
 
 var projectElementSchema = {
 	id: {
@@ -200,6 +213,7 @@ AppSchema.Project = new SimpleSchema(_.extend(
 
 Projects = new Meteor.Collection('projects');
 Projects.attachSchema(AppSchema.Project);
+addCollectionDisplayName(Projects, "Projects");
 
 var projectMessages = {};
 
@@ -267,6 +281,7 @@ AppSchema.Piece.messages({
 
 Pieces = new Meteor.Collection('pieces');
 Pieces.attachSchema(AppSchema.Piece);
+addCollectionDisplayName(Pieces, "Pieces");
 
 AppSchema.Bed = new SimpleSchema({
 	name: {
@@ -290,6 +305,7 @@ AppSchema.Bed = new SimpleSchema({
 
 Beds = new Meteor.Collection('beds');
 Beds.attachSchema(AppSchema.Bed);
+addCollectionDisplayName(Beds, "Beds");
 
 AppSchema.ProductLine = new SimpleSchema({
 	id: {
@@ -321,6 +337,7 @@ AppSchema.ProductLine = new SimpleSchema({
 
 ProductLines = new Meteor.Collection('productLines');
 ProductLines.attachSchema(AppSchema.ProductLine);
+addCollectionDisplayName(ProductLines, "Product Lines");
 AppSchema.ProductLine.messages({
 	"regEx id": "Product Code should be a three digit number."
 });

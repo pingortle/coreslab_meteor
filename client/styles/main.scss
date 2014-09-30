@@ -77,6 +77,28 @@ div.table-sidebar {
 	display: inline-block;
 }
 
+.circle {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    behavior: url(PIE.htc); /* IE8 */
+}
+
+.yes {
+    background: limegreen;
+    border: 2px solid lime;
+}
+
+.no {
+    background: darkred;
+    border: 2px solid firebrick;
+}
+
+.neutral {
+  background: grey;
+  border: 2px solid silver;
+}
+
 @media (min-width: $screen-md-min) {
 	div.table-collapse.collapse.table-sidebar {
 		height: auto;
