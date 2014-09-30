@@ -36,8 +36,12 @@ Meteor.publish('projects', function() {
 });
 
 // Publish appropriate pieces for authenticated users.
-Meteor.publish('pieces', function() {
-	console.log("Found " + Pieces.find().count() + " many pieces...");
+Meteor.publish('pieces', function(filter) {
+	filter = filter || {};
+
+	if (filter.singleId)
+		return Pieces.find({ _id: filter.singleId });
+
 	if (this.userId)
 		return Pieces.find();
 });

@@ -222,9 +222,11 @@ AppSchema.Project.messages({
 	"regEx elements.$.id": projectMessages.elementId = "Product Code should be a three digit number.",
 });
 
+var cancelUniqueIndex = { unique: false, index: false };
+
 AppSchema.Piece = new SimpleSchema({
-	projectID: projectSchema.id,
-	projectElementID: projectElementSchema.id,
+	projectID: _.extend(projectSchema.id, cancelUniqueIndex),
+	projectElementID: _.extend(projectElementSchema.id, cancelUniqueIndex),
 	mark: {
 		type: String,
 		label: "Piece Mark",
