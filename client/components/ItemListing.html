@@ -16,7 +16,8 @@
       {{#if isTextual this ..}}{{dataFor this ..}}{{/if}}
 
       {{#if isBoolean this ..}}
-        <div class="circle {{#if dataFor this ..}}yes{{else}}no{{/if}}"></div>
+        <div class="hidden-print circle {{#if dataFor this ..}}yes{{else}}no{{/if}}"></div>
+        <span class="visible-print">{{#if dataFor this ..}}Yes{{else}}No{{/if}}</span>
       {{/if}}
 
       {{#if isArray this ..}}{{countOf this ..}}{{/if}}
