@@ -20,6 +20,8 @@
         {{/if}}
         {{#if isArray this}}{{countOf this}}{{/if}}
         {{#if isObject this}}{{> ItemListing_object objectKey=.. ctx=../../.. object=this}}{{/if}}
+      {{else}}
+        <div class="circle no"></div>
       {{/with}}
       </td>
     {{/each}}
