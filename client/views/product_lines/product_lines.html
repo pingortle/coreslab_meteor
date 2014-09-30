@@ -1,25 +1,3 @@
 <template name="product_lines">
-<h1>Product Lines</h1>
-<table class="table">
-  <thead>
-    <tr>
-      <th>Product Code</th>
-      <th>Category</th>
-      <th>Decription</th>
-      <th>Unit of Measure</th>
-      <th>Active</th>
-    </tr>
-  </thead>
-  <tbody>
-  {{#each this}}
-    <tr>
-      <td>{{id}}</td>
-      <td>{{category}}</td>
-      <td>{{description}}</td>
-      <td>{{unitType}}</td>
-      <td> <div class="circle {{#if isActive}}yes{{else}}no{{/if}}"></div></td>
-    </tr>
-  {{/each}}
-  </tbody>
-</table>
+{{> ItemListing collection="ProductLines" cursor=this}}
 </template>
