@@ -8,7 +8,7 @@ var getSchema = function(collectionParam) {
   var collection = getCollection(collectionParam);
 
   return collection._c2._simpleSchema;
-}
+};
 
 Template.ItemListing.helpers({
   title: function(ctx) {
@@ -32,21 +32,24 @@ Template.ItemListing.helpers({
   dataFor: function(field, item) {
     return item[field];
   },
-  countOf: function(array) {
-    return array.length;
+  countOf: function(field, item) {
+    return item[field].length;
   },
 
-  isTextual: function(data) {
-    return _.isString(data);
+  isTextual: function(field, item) {
+    return _.isString(item[field]);
   },
-  isBoolean: function(data) {
-    return _.isBoolean(data);
+  isBoolean: function(field, item) {
+    return _.isBoolean(item[field]);
   },
-  isArray: function(data) {
-    return _.isArray(data);
+  isArray: function(field, item) {
+    return _.isArray(item[field]);
   },
-  isObject: function(data) {
-    return _.isObject(data);
+  isObject: function(field, item) {
+    return _.isObject(item[field]);
+  },
+  isNully: function(field, item) {
+    return _.isNull(item[field]) || _.isUndefined(item[field]);
   },
 });
 
@@ -62,7 +65,7 @@ Template.ItemListing_object.helpers({
     return schema.objectKeys(objectKey);
   },
 
-  dataFor: function(field, item) {
-    return item[field];
+  dataFor: function(field, obj, ctx) {
+    return obj[ctx.objectKey][field];
   },
 });

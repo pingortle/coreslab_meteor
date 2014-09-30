@@ -78,22 +78,25 @@ div.table-sidebar {
 }
 
 .circle {
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
     behavior: url(PIE.htc); /* IE8 */
 }
 
 .yes {
-    width: 16px;
-    height: 16px;
     background: limegreen;
     border: 2px solid lime;
 }
 
 .no {
-    width: 16px;
-    height: 16px;
     background: darkred;
     border: 2px solid firebrick;
+}
+
+.neutral {
+  background: grey;
+  border: 2px solid silver;
 }
 
 @media (min-width: $screen-md-min) {
