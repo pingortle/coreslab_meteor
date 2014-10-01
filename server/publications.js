@@ -28,7 +28,12 @@ Meteor.publish('workflows', function() {
 });
 
 // Publish appropriate projects for authenticated users.
-Meteor.publish('projects', function() {
+Meteor.publish('projects', function(filter) {
+	filter = filter || {};
+
+	if (filter.singleId)
+		return Projects.find({ _id: filter.singleId });
+
 	var options = { sort: { id: 1 } };
 
 	if (this.userId)
