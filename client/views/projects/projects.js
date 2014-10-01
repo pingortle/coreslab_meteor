@@ -11,6 +11,12 @@ Template.project_data.events({
 		var projectId = event.currentTarget.dataset.itemId;
 		Router.go('edit_project', { id: projectId });
 	},
+	'click button.remove-item': function(event) {
+		Router.go('projects');
+
+		var projectId = event.currentTarget.dataset.itemId;
+		Projects.remove(projectId);
+	},
 });
 
 Template.new_project.events({
