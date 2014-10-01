@@ -1,5 +1,5 @@
-<template name="new_workflow">
-{{#autoForm collection="Workflows" id="new_workflow_form" type="insert" }}
+<template name="workflow_form">
+{{#autoForm collection="Workflows" id="workflow_form" type=type doc=doc }}
 <fieldset>
   {{> afQuickField name='slug'}}
   {{> afQuickField name='name'}}
@@ -37,6 +37,10 @@
       {{/if}}
     </ul>
   </div>
+</template>
+
+<template name="new_workflow">
+{{> workflow_form type="insert"}}
 </template>
 
 <template name="afObjectField_action_links">
