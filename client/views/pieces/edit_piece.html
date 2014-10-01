@@ -1,5 +1,5 @@
 <template name="edit_piece">
-{{#autoForm collection="Pieces" id="new_piece_form" type="update" doc=this}}
+{{#autoForm collection="Pieces" id="edit_piece_form" type="update" doc=this}}
   {{> afQuickField name="projectID" readonly=""}}
   {{> afQuickField name="projectElementID" readonly=""}}
   {{> afQuickFields omitFields="projectID, projectElementID"}}
