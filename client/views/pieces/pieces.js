@@ -9,4 +9,8 @@ Template.pieces.events({
       element: piece.projectElementID
     });
   },
+  'click button.remove-item': function (e) {
+    var id = e.currentTarget.dataset.itemId;
+    Pieces.remove(id);
+  },
 });
