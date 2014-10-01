@@ -25,3 +25,25 @@ UI.registerHelper('CurrentNavRootActive', function (route) {
 UI.registerHelper('SlugRoute', function (root, slug) {
 	return root + "/" + slug;
 });
+
+// This helper takes a collection, either passed in directly or by its name,
+// and the type of permission, or types separated by spaces.
+// It only returns true if any of the permissions are in effect or you are
+// the super user.
+UI.registerHelper('HasPermission', function (collectionParam, type) {
+	if (isSuper(Meteor.userId())) return true;
+
+	if (Meteor.user())
+		var auth = Meteor.user().authorization;
+	if (!auth) return false;
+
+	var collectionAuth = auth[collectionParam] ||
+		auth[collectionParam._name] ||
+		auth[window[collectionParam]._name];
+
+	var types = type.split(' ');
+
+	return _.some(types, function(t) {
+		return collectionAuth[t];
+	});
+});

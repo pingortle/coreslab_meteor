@@ -37,7 +37,21 @@
 {{#with activeProject}}
 <div class="panel">
 	<div class="panel-header">
-		<h2>{{id}} <small class="project-description">{{description}}</small></h2>
+		<h2>
+			{{id}} <small class="project-description">{{description}}</small>
+		{{#if HasPermission 'Projects' 'update remove'}}
+			<span class="hidden-print">
+				<div class="btn-group btn-group-xs">
+				{{#if HasPermission 'Projects' 'update'}}
+					<button class="btn btn-default update-item" data-item-id="{{_id}}">Edit</button>
+				{{/if}}
+				{{#if HasPermission 'Projects' 'remove'}}
+					<button class="btn btn-danger remove-item" data-item-id="{{_id}}">Delete</button>
+				{{/if}}
+				</div>
+			</span>
+		{{/if}}
+		</h2>
 	</div>
 	<div class="panel-body">
 		<div class="well">
@@ -93,6 +107,21 @@
 
 <template name="new_project">
 {{#autoForm collection="Projects" id="new_project_form" type="insert"}}
+<fieldset>
+	{{> afQuickField name='id'}}
+	{{> afQuickField name='description'}}
+	{{> afQuickField name='customer'}}
+	{{> afQuickField name='status'}}
+	{{> afQuickField name='estimatedPourCount'}}
+	{{> afQuickField name='estimatedLoads'}}
+	{{> afArrayField name='elements' template="project_elements" omitFields="elements.$.id"}}
+	<button type="submit" class="btn btn-primary">Submit</button>
+</fieldset>
+{{/autoForm}}
+</template>
+
+<template name="edit_project">
+{{#autoForm collection="Projects" id="edit_project_form" type="update" doc=this}}
 <fieldset>
 	{{> afQuickField name='id'}}
 	{{> afQuickField name='description'}}

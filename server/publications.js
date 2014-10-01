@@ -28,7 +28,12 @@ Meteor.publish('workflows', function() {
 });
 
 // Publish appropriate projects for authenticated users.
-Meteor.publish('projects', function() {
+Meteor.publish('projects', function(filter) {
+	filter = filter || {};
+
+	if (filter.singleId)
+		return Projects.find({ _id: filter.singleId });
+
 	var options = { sort: { id: 1 } };
 
 	if (this.userId)
@@ -36,8 +41,12 @@ Meteor.publish('projects', function() {
 });
 
 // Publish appropriate pieces for authenticated users.
-Meteor.publish('pieces', function() {
-	console.log("Found " + Pieces.find().count() + " many pieces...");
+Meteor.publish('pieces', function(filter) {
+	filter = filter || {};
+
+	if (filter.singleId)
+		return Pieces.find({ _id: filter.singleId });
+
 	if (this.userId)
 		return Pieces.find();
 });
@@ -50,11 +59,17 @@ _.each([ProductLines, Beds],
 	//   allowInactive (Boolean): Publish inactive as well as active?
 	function(collection) {
 		Meteor.publish(collection._name, function(filter) {
+			if (!this.userId)
+				return null;
+
 			filter = filter || {};
+
+			if (filter.singleId)
+				return collection.find({ _id: filter.singleId });
+
 			var options = { sort: { id: 1 } };
 			var selector = filter.allowInactive ? {} : { isActive: true };
 
-			if (this.userId)
-				return collection.find(selector, options);
+			return collection.find(selector, options);
 		});
 	});

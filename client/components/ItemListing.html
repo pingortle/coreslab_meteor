@@ -6,6 +6,9 @@
     {{#each fields this}}
       <th>{{labelFor this ..}}</th>
     {{/each}}
+    {{#if HasPermission collection 'update remove'}}
+    <th class="hidden-print"></th>
+    {{/if}}
     </tr>
   </thead>
   <tbody>
@@ -31,6 +34,19 @@
       {{/if}}
       </td>
     {{/each}}
+
+    {{#if HasPermission ../collection 'update remove'}}
+    <td class="hidden-print">
+      <div class="btn-group btn-group-xs">
+      {{#if HasPermission ../collection 'update'}}
+        <button class="btn btn-default update-item" data-item-id="{{_id}}">Edit</button>
+      {{/if}}
+      {{#if HasPermission ../collection 'remove'}}
+        <button class="btn btn-danger remove-item" data-item-id="{{_id}}">Delete</button>
+      {{/if}}
+      </div>
+    </td>
+    {{/if}}
     </tr>
   {{/each}}
   </tbody>
