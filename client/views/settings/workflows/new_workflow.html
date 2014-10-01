@@ -1,3 +1,52 @@
 <template name="new_workflow">
-{{> quickForm id='newWorkflowForm' collection='Workflows' type='insert'}}
+{{#autoForm collection="Workflows" id="new_workflow_form" type="insert" }}
+<fieldset>
+  {{> afQuickField name='slug'}}
+  {{> afQuickField name='name'}}
+  {{> afArrayField name='actionLinks' template="action_links" omitFields="elements.$.link"}}
+  <button type="submit" class="btn btn-primary">Submit</button>
+</fieldset>
+{{/autoForm}}
+</template>
+
+<template name="afArrayField_action_links">
+  <div class="panel panel-default">
+    <div class="panel-heading">{{afFieldLabelText name=this.atts.name}}</div>
+    {{#if afFieldIsInvalid name=this.atts.name}}
+    <div class="panel-body has-error">
+      <span class="help-block">{{{afFieldMessage name=this.atts.name}}}</span>
+    </div>
+    {{/if}}
+    <ul class="list-group">
+      {{#afEachArrayItem name=this.atts.name minCount=this.atts.minCount maxCount=this.atts.maxCount}}
+      <li class="list-group-item autoform-array-item">
+        <div class="media">
+          {{#if afArrayFieldHasMoreThanMinimum name=../atts.name minCount=../atts.minCount maxCount=../atts.maxCount}}
+          <button class="btn btn-primary autoform-remove-item pull-left"><span class="glyphicon glyphicon-minus"></span></button>
+          {{/if}}
+          <div class="media-body">
+            {{> afObjectField name=this.name label=false options="auto" fields=../atts.fields omitFields=../atts.omitFields template="action_links"}}
+          </div>
+        </div>
+      </li>
+      {{/afEachArrayItem}}
+      {{#if afArrayFieldHasLessThanMaximum name=this.atts.name minCount=this.atts.minCount maxCount=this.atts.maxCount}}
+      <li class="list-group-item">
+        <button class="btn btn-primary autoform-add-item" data-autoform-field="{{this.atts.name}}" data-autoform-minCount="{{this.atts.minCount}}" data-autoform-maxCount="{{this.atts.maxCount}}"><span class="glyphicon glyphicon-plus"></span></button>
+      </li>
+      {{/if}}
+    </ul>
+  </div>
+</template>
+
+<template name="afObjectField_action_links">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      {{#if afFieldIsInvalid name=this.atts.name}}
+      <span class="help-block">{{{afFieldMessage name=this.atts.name}}}</span>
+      {{/if}}
+      {{> afQuickField name=linkField options=routes}}
+      {{> afQuickFields name=this.atts.name fields=this.atts.fields omitFields="actionLinks.$.link"}}
+    </div>
+  </div>
 </template>
