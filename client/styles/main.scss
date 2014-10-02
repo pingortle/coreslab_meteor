@@ -102,10 +102,10 @@ div.table-sidebar {
 #iron-router-progress {
   background-color: silver;
   box-shadow: 0 0 5px silver;
+}
 
-  .spinner {
-    border-color: silver;
-  }
+#iron-router-progress.spinner:before {
+  border-color: silver;
 }
 
 @media (min-width: $screen-md-min) {
