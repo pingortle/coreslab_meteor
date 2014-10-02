@@ -99,6 +99,15 @@ div.table-sidebar {
   border: 2px solid silver;
 }
 
+#iron-router-progress {
+  background-color: silver;
+  box-shadow: 0 0 5px silver;
+
+  .spinner {
+    border-color: silver;
+  }
+}
+
 @media (min-width: $screen-md-min) {
 	div.table-collapse.collapse.table-sidebar {
 		height: auto;

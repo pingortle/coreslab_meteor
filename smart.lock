@@ -9,7 +9,8 @@
       "autoform": {},
       "iron-router": {},
       "zones": {},
-      "kadira": {}
+      "kadira": {},
+      "iron-router-progress": {}
     },
     "packages": {
       "accounts-ui-bootstrap-3": {
@@ -44,13 +45,18 @@
       },
       "zones": {
         "git": "https://github.com/meteorhacks/zones.git",
-        "tag": "v1.2.1",
-        "commit": "2a918aecd64a1d75a9a18388216a7e0855a83831"
+        "tag": "v1.3.1",
+        "commit": "28a38ebb35dee38172a8b7c18d731048bb5e6e0a"
       },
       "kadira": {
         "git": "https://github.com/meteorhacks/kadira.git",
-        "tag": "v2.9.0",
-        "commit": "d1c256ba821712bb8620e94a7599990bd4bc9281"
+        "tag": "v2.10.1",
+        "commit": "aa2f63203108b4a25e40acdeb8741e5a6daaa4f1"
+      },
+      "iron-router-progress": {
+        "git": "https://github.com/Multiply/iron-router-progress.git",
+        "tag": "v0.4.1",
+        "commit": "496fcda9a6ec352b4733725f60c6f280250c3541"
       },
       "scss": {
         "git": "https://github.com/fourseven/meteor-scss.git",

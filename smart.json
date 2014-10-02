@@ -7,6 +7,7 @@
     "autoform": {},
     "iron-router": {},
     "zones": {},
-    "kadira": {}
+    "kadira": {},
+    "iron-router-progress": {}
   }
 }
