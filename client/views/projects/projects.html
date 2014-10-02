@@ -16,10 +16,12 @@
 						<td>{{description}}</td>
 					</tr>
 					{{/each}}
+					{{#if HasPermission 'Projects' 'insert'}}
 					<tr class="project-row">
 						<td><a class="btn btn-default btn-xs add-project" href="/projects/new">+</a></td>
 						<td>Add a new project…</td>
 					</tr>
+					{{/if}}
 				</tbody>
 			</table>
 		</div>
@@ -95,7 +97,9 @@
 					<dt>Est. Number of Pours</dt><dd>{{estimatedPourCount}}</dd>
 					<dt>Est. Number of Pieces</dt><dd>{{estimatedPieceCount}}</dd>
 					<dt>Labor Entry Style</dt><dd>{{laborEntry}}</dd>
+					{{#if HasPermission 'Pieces' 'insert'}}
 					<dt><a href="{{pathFor 'new_piece' id=../id element=id}}">+ Add Piece to {{id}}</a></dt><dd></dd>
+					{{/if}}
 				</dl>
 				<hr>
 			{{/each}}
