@@ -43,7 +43,6 @@ Meteor.startup(function() {
 	// Seed the DB with fake info.
 	// TODO: Delete/replace this stuff before going into production.
 	if (Workflows.find().count() === 0) {
-		logDatabaseSeed(Workflows);
 		var workflows = [
 			{
 				slug: "production",
