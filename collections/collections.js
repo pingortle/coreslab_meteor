@@ -12,7 +12,7 @@ AppSchema.getDisplayName = function(collection) {
 var addCollectionDisplayName = function(collection, name) {
 	var displayNames = AppSchema.DisplayNames;
 	displayNames[collection._name] = name;
-}
+};
 
 // This converts a schema definition into list form.
 // DEPRECATED: newer versions of Simple Schema support nested schemas.
@@ -194,9 +194,9 @@ var projectSchema = {
 		type: Date,
 		autoValue: function() {
 			if (this.isInsert) {
-				return new Date;
+				return new Date();
 			} else if (this.isUpsert) {
-				return { $setOnInsert: new Date };
+				return { $setOnInsert: new Date() };
 			} else {
 				this.unset();
 			}
@@ -370,7 +370,7 @@ var authSchemaDefinition = _.reduce(
 		_.each(
 			_.map(["insert", "update", "remove"],
 				function(y) { return n + "." + y; }),
-			function(y) { acc[y] = { type: Boolean }});
+			function(y) { acc[y] = { type: Boolean }; });
 		return acc;
 	},
 	{});

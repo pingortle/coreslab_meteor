@@ -5,7 +5,7 @@ Template.user_authorization_settings.events({
     Meteor.call('setUserAuthorization', values.insertDoc, function (error, result) {
       if (error)
       {
-        $(ckbox).prop('checked', !ckbox.checked)
+        $(ckbox).prop('checked', !ckbox.checked);
       }
     });
   }
@@ -26,7 +26,7 @@ Template.user_authorization_settings.subDoc = function(obj, key) {
 
 Template.user_authorization_settings.authTypes = function(baseName) {
   return _.map(["insert", "update", "remove"],
-    function(x) { return { fieldName: baseName + "." + x } });
+    function(x) { return { fieldName: baseName + "." + x }; });
 };
 
 Template.user_authorization_settings.rendered = function() {

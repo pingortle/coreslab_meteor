@@ -33,8 +33,12 @@ UI.registerHelper('SlugRoute', function (root, slug) {
 UI.registerHelper('HasPermission', function (collectionParam, type) {
 	if (isSuper(Meteor.userId())) return true;
 
-	if (Meteor.user())
-		var auth = Meteor.user().authorization;
+	var auth = null;
+	if (Meteor.user()) {
+		auth = Meteor.user().authorization;
+	}
+
+	// No authorizations === no permissions
 	if (!auth) return false;
 
 	var collectionAuth = auth[collectionParam] ||
