@@ -30,7 +30,22 @@ Meteor.methods({
 			throw new Meteor.Error(403, 'Error 403: Not authorized');
 
 		Roles.removeUsersFromRoles(userId, [role]);
-	}
+	},
+	setEmailVerification: function(email, shouldBeVerified) {
+		var user = Meteor.users.findOne(this.userId);
+		var auth = user.authorization &&
+			user.authorization.users &&
+			user.authorization.users.update;
+		if (!user || !auth && !Roles.userIsInRole(this.userId, ['super']))
+			throw new Meteor.Error(403, 'Not authorized');
+
+		check(email, String);
+		check(shouldBeVerified, Boolean);
+
+		Meteor.users.update(
+			{"emails.address": email },
+			{ $set: { "emails.$.verified": shouldBeVerified } });
+	},
 });
 
 // Docs @ http://docs.meteor.com/#meteor_startup

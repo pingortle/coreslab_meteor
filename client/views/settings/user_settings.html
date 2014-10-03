@@ -5,7 +5,15 @@
 	<li class="list-group-item">
     <div class="row">
       <div class="col-md-8">
-        {{#each emails}}<span>{{address}}</span>{{/each}}
+      {{#each emails}}
+        <div>
+          <button class="btn btn-xs btn-default user-verified-indicator {{#if verified}}verified{{/if}}" title="Click to {{verificationAction verified}} this email address." data-email="{{address}}">
+            <span class="verification-button-content">{{#if verified}}Disable{{else}}Enable{{/if}}</span>
+          </button>
+          <div class="circle {{#if verified}}yes{{else}}no{{/if}}"></div>
+          {{address}}
+        </div>
+      {{/each}}
       </div>
       <div class="btn-group btn-group-xs col-md-4">
         <a class="btn btn-default" href="{{pathFor 'user_authorization_settings' id=_id}}">Authorization</a>
