@@ -254,7 +254,7 @@ AppSchema.Piece = new SimpleSchema({
 	},
 	weight: {
 		type: String,
-		label: "Weight (ft)"
+		label: "Weight (lbs)"
 	},
 	concreteVolume: {
 		type: Object,
