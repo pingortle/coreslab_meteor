@@ -1,11 +1,13 @@
 var userWorkflows = null;
 
+var sortBySlug = { sort: {slug: 1} };
+
 Template.user_workflow_settings.helpers({
   userWorkflows: userWorkflows = function (userId) {
-    return isSuper(userId) ? Workflows.find() : Workflows.find({slug: { $in: roleArray(userId) }});
+    return isSuper(userId) ? Workflows.find({}, sortBySlug) : Workflows.find({slug: { $in: roleArray(userId) }}, sortBySlug);
   },
   nonUserWorkflows: function (userId) {
-    return isSuper(userId) ? [] : Workflows.find({slug: { $nin: roleArray(userId) }});
+    return isSuper(userId) ? [] : Workflows.find({slug: { $nin: roleArray(userId) }}, sortBySlug);
   }
 });
 

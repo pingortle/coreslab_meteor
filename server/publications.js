@@ -9,7 +9,7 @@ Meteor.publish('myAuthorizations', function() {
 // Publish all users' info to the super user.
 Meteor.publish('managedUsers', function(userId) {
 	if (Roles.userIsInRole(this.userId, ['super']))
-			return Meteor.users.find(userId || {});
+			return Meteor.users.find(userId || {}, { sort: { createdAt: 0 } });
 	else
 		this.ready();
 });
@@ -18,9 +18,9 @@ Meteor.publish('managedUsers', function(userId) {
 Meteor.publish('workflows', function() {
 	if (this.userId) {
 		if (Roles.userIsInRole(this.userId, ['super']))
-			return Workflows.find();
+			return Workflows.find({}, { sort: { slug: 1 } });
 		else
-			return Workflows.find({slug: { $in: roleArray(this.userId) }});
+			return Workflows.find({slug: { $in: roleArray(this.userId) }}, { sort: { slug: 1 } });
 	}
 	else {
 		this.ready();
@@ -48,7 +48,7 @@ Meteor.publish('pieces', function(filter) {
 		return Pieces.find({ _id: filter.singleId });
 
 	if (this.userId)
-		return Pieces.find();
+		return Pieces.find({}, { sort: {id: 1} });
 });
 
 // Publish collections with common filter options.
