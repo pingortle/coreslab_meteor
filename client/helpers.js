@@ -15,7 +15,8 @@ UI.registerHelper('CurrentSlugActive', function (slug) {
 
 UI.registerHelper('CurrentNavRootActive', function (route) {
 	if (Router.current()) {
-		return Router.current().path.indexOf(escape(route)) === 0 ? "active" : "";
+		var root = "/" + _.first(_.compact(Router.current().path.split('/')));
+		return root === escape(route) ? "active" : "";
 	}
 });
 /******************************************************************************/
