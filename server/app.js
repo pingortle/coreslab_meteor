@@ -46,6 +46,19 @@ Meteor.methods({
 			{"emails.address": email },
 			{ $set: { "emails.$.verified": shouldBeVerified } });
 	},
+	removeProject: function(projectId) {
+		var user = Meteor.users.findOne(this.userId);
+		var auth = user.authorization &&
+			user.authorization.projects &&
+			user.authorization.projects.remove;
+		if (!user || !auth && !Roles.userIsInRole(this.userId, ['super']))
+			throw new Meteor.Error(403, 'Not authorized');
+
+		check(projectId, String);
+
+		Projects.remove({id: projectId});
+		Pieces.remove({projectID: projectId});
+	},
 });
 
 // Docs @ http://docs.meteor.com/#meteor_startup
