@@ -1,6 +1,6 @@
 Template.user_settings.events({
   'click .user-verified-indicator': function (e) {
-    var isValid = $(e.currentTarget).hasClass("yes");
+    var isValid = $(e.currentTarget).hasClass("verified");
     var email = e.currentTarget.dataset.email;
     var action = isValid ? "disable"  : "enable";
 

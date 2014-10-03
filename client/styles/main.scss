@@ -82,6 +82,7 @@ div.table-sidebar {
     height: 16px;
     border-radius: 50%;
     display: inline-block;
+    vertical-align: middle;
     behavior: url(PIE.htc); /* IE8 */
 }
 
@@ -98,6 +99,16 @@ div.table-sidebar {
 .neutral {
   background: grey;
   border: 2px solid silver;
+}
+
+button.user-verified-indicator {
+  padding: 1px 5px;
+}
+
+span.verification-button-content {
+  width: 5em;
+  display: inline-block;
+  text-align: center;
 }
 
 #iron-router-progress {

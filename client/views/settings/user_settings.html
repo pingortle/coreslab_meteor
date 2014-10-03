@@ -7,7 +7,10 @@
       <div class="col-md-8">
       {{#each emails}}
         <div>
-          <div class="circle {{#if verified}}yes{{else}}no{{/if}} user-verified-indicator" title="Click to {{verificationAction verified}} this email address." data-email="{{address}}"></div>
+          <button class="btn btn-xs btn-default user-verified-indicator {{#if verified}}verified{{/if}}" title="Click to {{verificationAction verified}} this email address." data-email="{{address}}">
+            <span class="verification-button-content">{{#if verified}}Disable{{else}}Enable{{/if}}</span>
+          </button>
+          <div class="circle {{#if verified}}yes{{else}}no{{/if}}"></div>
           {{address}}
         </div>
       {{/each}}
