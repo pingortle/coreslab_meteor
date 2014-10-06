@@ -115,6 +115,24 @@ span.verification-button-content {
   text-align: center;
 }
 
+.user-email-settings {
+  display: inline-block;
+}
+
+.user-management-links {
+  float: right;
+}
+
+@media (max-width: $screen-xs-min) {
+  .user-email-settings {
+    display: block;
+    margin-bottom: 4px;
+  }
+  .user-management-links {
+    float: none;
+  }
+}
+
 #iron-router-progress {
   background-color: silver;
   box-shadow: 0 0 5px silver;

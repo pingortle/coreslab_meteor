@@ -3,10 +3,8 @@
 <ul class="list-group">
 {{#each this}}
 	<li class="list-group-item">
-    <div class="row">
-      <div class="col-md-8">
       {{#each emails}}
-        <div>
+        <div class="user-email-settings">
           <button class="btn btn-xs btn-default user-verified-indicator {{#if verified}}verified{{/if}}" title="Click to {{verificationAction verified}} this email address." data-email="{{address}}">
             <span class="verification-button-content">{{#if verified}}Disable{{else}}Enable{{/if}}</span>
           </button>
@@ -14,12 +12,10 @@
           {{address}}
         </div>
       {{/each}}
-      </div>
-      <div class="btn-group btn-group-xs col-md-4">
+      <div class="btn-group btn-group-xs user-management-links">
         <a class="btn btn-default" href="{{pathFor 'user_authorization_settings' id=_id}}">Authorization</a>
         <a class="btn btn-default" href="{{pathFor 'user_workflow_settings' id=_id}}">Workflows</a>
       </div>
-    </div>
 	</li>
 {{/each}}
 </ul>
