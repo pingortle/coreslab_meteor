@@ -1,9 +1,9 @@
 <template name="user_authorization_settings">
+<h3>Authorizations for {{username}} <small>Checking the boxes immediately modifies this user's permissions.</small></h3>
 {{#autoForm schema=authSchema id="authorizationForm" type="method" meteormethod="setUserAuthorization"}}
   <fieldset>
       {{> afFieldInput type="hidden" name="userId" value=_id}}
       <table class="table">
-        <caption>Authorizations for {{username}}</caption>
         <thead>
           <tr>
             <th>Data</th>
