@@ -2,6 +2,10 @@
 // Docs for autoform @ https://atmospherejs.com/aldeed/autoform
 
 AppSchema = {};
+AppSchema.RegEx = {};
+AppSchema.Messages = {};
+AppSchema.RegEx.ImperialLength = /^(?:0|[1-9][0-9]*(?:\/[1-9][0-9]*| [1-9][0-9]*\/[1-9][0-9]*)?(?:'|")|[1-9][0-9]*' [1-9][0-9]*(?:\/[1-9][0-9]*\/[1-9][0-9]*)?")$/;
+AppSchema.Messages.ImperialLength = "Enter a length, like 0, 12', 12 1/2', 12' 6\", etc...";
 
 // This should be a mapping from Collection._name to the name as displayed in the UI.
 AppSchema.DisplayNames = {};
@@ -83,10 +87,9 @@ var projectElementSchema = {
 		min: 0,
 	},
 	"estimate.totalSqFt": {
-		type: Number,
+		type: String,
 		label: "Total Area (sqft)",
-		decimal: true,
-		min: 0,
+		regEx: AppSchema.RegEx.ImperialLength,
 	},
 	actual: {
 		type: Object,
@@ -100,10 +103,9 @@ var projectElementSchema = {
 		min: 0,
 	},
 	"actual.totalSqFt": {
-		type: Number,
+		type: String,
 		label: "Total Area (sqft)",
-		decimal: true,
-		min: 0,
+		regEx: AppSchema.RegEx.ImperialLength,
 	},
 	estimatedPourCount: {
 		type: Number,
@@ -129,13 +131,13 @@ var projectElementSchema = {
 };
 
 var projectStatusAllowedVals = ["sold", "cancelled", "pending"];
-var projectIdRegex = /^[0-9]{3}\.[0-9]{3}$/;
+var projectIdRegEx = /^[0-9]{3}\.[0-9]{3}$/;
 
 var projectSchema = {
 	id: {
 		type: String,
 		label: "Project Number",
-		regEx: projectIdRegex,
+		regEx: projectIdRegEx,
 		index: true,
 		unique: true,
 	},
@@ -220,6 +222,8 @@ var projectMessages = {};
 AppSchema.Project.messages({
 	"regEx id": projectMessages.id = "Project IDs should be made up of digits and periods, e.g. 123.456",
 	"regEx elements.$.id": projectMessages.elementId = "Product Code should be a three digit number.",
+	"regEx estimate.totalSqFt": AppSchema.Messages.ImperialLength,
+	"regEx actual.totalSqFt": AppSchema.Messages.ImperialLength,
 });
 
 var cancelUniqueIndex = { unique: false, index: false };
@@ -239,18 +243,22 @@ AppSchema.Piece = new SimpleSchema({
 	length: {
 		type: String,
 		label: "Length (ft)",
+		regEx: AppSchema.RegEx.ImperialLength,
 	},
 	width: {
 		type: String,
 		label: "Width (ft)",
+		regEx: AppSchema.RegEx.ImperialLength,
 	},
 	depth: {
 		type: String,
 		label: "Depth (ft)",
+		regEx: AppSchema.RegEx.ImperialLength,
 	},
 	height: {
 		type: String,
 		label: "Height (ft)",
+		regEx: AppSchema.RegEx.ImperialLength,
 	},
 	weight: {
 		type: String,
@@ -259,7 +267,7 @@ AppSchema.Piece = new SimpleSchema({
 	concreteVolume: {
 		type: Object,
 		label: "Concrete Volume (cubic yds)"
-	},
+	}, 
 	"concreteVolume.face": {
 		type: String,
 		label: "Face",
@@ -279,6 +287,11 @@ AppSchema.Piece = new SimpleSchema({
 AppSchema.Piece.messages({
 	"regEx projectID": projectMessages.id,
 	"regEx projectElementID": projectMessages.elementId,
+	"regEx length": AppSchema.Messages.ImperialLength,
+	"regEx width": AppSchema.Messages.ImperialLength,
+	"regEx depth": AppSchema.Messages.ImperialLength,
+	"regEx height": AppSchema.Messages.ImperialLength,
+	"regEx weight": AppSchema.Messages.ImperialLength,
 });
 
 Pieces = new Meteor.Collection('pieces');
@@ -293,16 +306,23 @@ AppSchema.Bed = new SimpleSchema({
 	formLength: {
 		type: String,
 		label: "Form Length (ft)",
+		regEx: AppSchema.RegEx.ImperialLength,
 	},
 	strandLength: {
 		type: String,
 		label: "Strand Length (ft)",
+		regEx: AppSchema.RegEx.ImperialLength,
 	},
 	isActive: {
 		type: Boolean,
 		label: "Active",
 		defaultValue: true,
 	},
+});
+
+AppSchema.Bed.messages({
+	"regEx formLength": AppSchema.Messages.ImperialLength,
+	"regEx strandLength": AppSchema.Messages.ImperialLength,
 });
 
 Beds = new Meteor.Collection('beds');
