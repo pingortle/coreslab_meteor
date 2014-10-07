@@ -5,7 +5,7 @@ Template.user_workflow_settings.helpers({
     return Workflows.find({}, sortBySlug);
   },
   doesOwnWorkflow: function (userId, slug) {
-    return Roles.userIsInRole(userId, [slug]);
+    return Roles.userIsInRole(userId, [slug]) || isSuper(userId);
   },
   username: function(user) {
     var emailObj = user && _.first(user.emails);
