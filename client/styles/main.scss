@@ -115,8 +115,18 @@ span.verification-button-content {
   text-align: center;
 }
 
-.user-email-settings {
-  display: inline-block;
+@media (min-width: $screen-xs-min + 1) {
+  li.list-group-item > div:nth-last-of-type(-n + 2) {
+    display: inline-block;
+  }
+}
+
+li.list-group-item > div:nth-last-of-type(-n + 2):after {
+  content: "";
+}
+
+.user-email-settings:after {
+  content: ", ";
 }
 
 .user-management-links {
