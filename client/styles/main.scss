@@ -115,6 +115,39 @@ span.verification-button-content {
   text-align: center;
 }
 
+@media (min-width: $screen-xs-min + 1) {
+  li.list-group-item > div:nth-last-of-type(-n + 2) {
+    display: inline-block;
+  }
+}
+
+li.list-group-item > div:nth-last-of-type(-n + 2):after {
+  content: "";
+}
+
+.user-email-settings:after {
+  content: ", ";
+}
+
+.user-management-links {
+  float: right;
+}
+
+.user-management-heading {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: $screen-xs-min) {
+  .user-email-settings {
+    display: block;
+    margin-bottom: 4px;
+  }
+  .user-management-links {
+    float: none;
+  }
+}
+
 #iron-router-progress {
   background-color: silver;
   box-shadow: 0 0 5px silver;
