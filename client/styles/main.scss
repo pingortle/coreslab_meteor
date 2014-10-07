@@ -133,6 +133,11 @@ li.list-group-item > div:nth-last-of-type(-n + 2):after {
   float: right;
 }
 
+.user-management-heading {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 @media (max-width: $screen-xs-min) {
   .user-email-settings {
     display: block;

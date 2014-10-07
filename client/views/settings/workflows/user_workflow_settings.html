@@ -1,5 +1,5 @@
 <template name='user_workflow_settings'>
-<h3>Workflows for {{username user}} <small>Click the workflows this user should be allowed to view.</small></h3>
+<h3 class="user-management-heading">Workflows for {{username user}} <small>Click the workflows this user should be allowed to view.</small></h3>
 <ul class="list-group">
 {{#each workflows user._id}}
   <a class="list-group-item workflow-item {{#if doesOwnWorkflow ../user/_id slug}}active{{/if}}" data-slug="{{slug}}">
