@@ -5,16 +5,20 @@
 
 standard-app-packages
 accounts-password
-accounts-ui-bootstrap-3
 underscore
-bootstrap3-sass
-scss
-roles
-fastclick
-autoform
-simple-schema
-collection2
-iron-router
-zones
-kadira
-iron-router-progress
+
+# fastclick
+# Not sure if the above package works for non-Cordova apps.
+# If not, use this:
+percolatestudio:fastclick
+
+reywood:bootstrap3-sass
+ian:accounts-ui-bootstrap-3
+aldeed:simple-schema
+aldeed:collection2
+iron:router
+mrt:iron-router-progress
+meteorhacks:kadira
+aldeed:autoform
+aldeed:collection2
+alanning:roles
