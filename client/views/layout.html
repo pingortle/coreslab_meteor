@@ -29,6 +29,14 @@
     </div>
 </nav>
 <div class="container content" id="main">
+{{#if breadcrumbs}}
+  <ol class="breadcrumb">
+    <li><a href="/">Home</a></li>
+  {{#each breadcrumbs}}
+    <li>{{#if route}}<a href="{{pathFor route}}">{{title}}</a>{{else}}{{title}}{{/if}}</li>
+  {{/each}}
+  </ol>
+{{/if}}
   {{> yield}}
 </div>
 </template>
