@@ -1,6 +1,6 @@
 // $icon-font-path: "../styles/fonts/"; // Change the path to the fonts
 @import 'client/styles/theme/variables';
-@import '.meteor/local/build/programs/server/assets/packages/reywood_bootstrap3-sass/bootstrap';
+@import 'bootstrap';
 @import 'client/styles/theme/bootswatch';
 
 html, body {
