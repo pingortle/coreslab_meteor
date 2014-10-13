@@ -1,7 +1,9 @@
 <template name="settings">
 	<h1>Settings</h1>
 	<p><a href="{{pathFor 'user_settings'}}">Manage Users</a></p>
+  {{#if HasPermission 'Workflows' 'insert'}}
 	<p><a href="{{pathFor 'new_workflow'}}">Add Workflows</a></p>
+  {{/if}}
   <p><a href="{{pathFor 'workflows_listing'}}">View Existing Workflows</a></p>
   <label>My name is: <input name="name" type="text" class="form-control" value="{{currentUser.profile.name}}"></label>
   <button id="changeName" class="btn btn-primary btn-xs">Change My Name</button>
