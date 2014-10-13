@@ -12,6 +12,8 @@ Template.user_authorization_settings.events({
 });
 
 Template.user_authorization_settings.username = function() {
+  if (this.username) return this.username;
+
   var emailObj = _.first(this.emails);
   return emailObj && emailObj.address;
 };

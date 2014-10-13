@@ -52,3 +52,9 @@ UI.registerHelper('HasPermission', function (collectionParam, type) {
 		return collectionAuth[t];
 	});
 });
+
+UI.registerHelper('GravatarUrl', function (user) {
+	var user = user || Meteor.user() || { emails: [] };
+  var email = _.first(_.pluck(user.emails, "address")) || "user@example.com";
+  return Gravatar.imageUrl(email, { size: 40, default: "mm" });
+});

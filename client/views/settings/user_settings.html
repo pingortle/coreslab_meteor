@@ -3,6 +3,9 @@
 <ul class="list-group">
 {{#each this}}
 	<li class="list-group-item">
+    <p class="lead">
+      <img src="{{GravatarUrl this}}" class="img-circle"> <strong>{{username}}</strong>
+    </p>
       {{#each emails}}
         <div class="user-email-settings">
           <button class="btn btn-xs btn-default user-verified-indicator {{#if verified}}verified{{/if}}" title="Click to {{verificationAction verified}} this email address." data-email="{{address}}">

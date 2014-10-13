@@ -8,6 +8,8 @@ Template.user_workflow_settings.helpers({
     return Roles.userIsInRole(userId, [slug]) || isSuper(userId);
   },
   username: function(user) {
+    if (user.username) return user.username;
+
     var emailObj = user && _.first(user.emails);
     return user && user.username || emailObj && emailObj.address;
   },
