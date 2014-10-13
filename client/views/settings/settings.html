@@ -5,6 +5,11 @@
 	<p><a href="{{pathFor 'new_workflow'}}">Add Workflows</a></p>
   {{/if}}
   <p><a href="{{pathFor 'workflows_listing'}}">View Existing Workflows</a></p>
-  <label>My name is: <input name="name" type="text" class="form-control" value="{{currentUser.profile.name}}"></label>
-  <button id="changeName" class="btn btn-primary btn-xs">Change My Name</button>
+  <div>
+    <label>My name is:
+      <input name="name" type="text" class="form-control" value="{{currentUser.profile.name}}">
+    </label>
+    <button id="changeName" class="btn btn-primary btn-xs">Change My Name</button>
+  </div>
+  <p><em><small>This app uses <a href="http://en.gravatar.com/support/">Gravatar</a> to manage your profile picture. Click the link for more info.</small></em></p>
 </template>
