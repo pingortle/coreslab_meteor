@@ -68,9 +68,26 @@ Meteor.startup(function() {
 		Roles.createRole("basic");
 	}
 
+	// Seed the DB with admin and example user accounts.
+	if (Meteor.users.find().count() === 0) {
+		console.log("Seeding Users...");
+		var users = [
+			{username: "admin", email: "admin@coreslab.com", password: "Password1", profile: { name: "Administrator" } },
+			{username: "example", email: "example@coreslab.com", password: "Password1", profile: { name: "Joe Blow" } },
+		];
+
+		_.each(users, function(u, idx) {
+			var newUserId = Accounts.createUser(u);
+
+			Meteor.users.update({ _id: newUserId, "emails.verified": false }, { $set: { "emails.$.verified": true }});
+			if (idx === 0) Roles.addUsersToRoles(newUserId, ["super"]);
+		});
+	}
+
 	// Seed the DB with fake info.
 	// TODO: Delete/replace this stuff before going into production.
 	if (Workflows.find().count() === 0) {
+		console.log("Seeding Workflows...");
 		var workflows = [
 			{
 				slug: "production",
