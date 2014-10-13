@@ -11,7 +11,7 @@ Accounts.validateLoginAttempt(function(attempt) {
   if (attempt.user && !_.some(
       attempt.user.emails,
       function(email) { return email.verified; }))
-    throw new Meteor.Error(403, 'Email address not verified.');
+    throw new Meteor.Error(403, 'Your email address is not yet verified. Please check your email for a verification link or contact your administrator.');
 
   return true;
 });
