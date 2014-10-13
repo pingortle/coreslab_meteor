@@ -53,6 +53,7 @@ UI.registerHelper('HasPermission', function (collectionParam, type) {
 	});
 });
 
+// This helper hands out gravatar urls for a given user.
 UI.registerHelper('GravatarUrl', function (user) {
 	user = user || Meteor.user() || { emails: [] };
   var email = _.first(_.pluck(user.emails, "address")) || "user@example.com";
