@@ -35,6 +35,9 @@ iron:core@0.3.4
 iron:dynamic-template@0.4.1
 iron:layout@0.4.1
 iron:router@0.9.4
+jparker:crypto-core@0.1.0
+jparker:crypto-md5@0.1.1
+jparker:gravatar@0.2.0
 jquery@1.0.0
 json@1.0.0
 less@1.0.9
@@ -44,7 +47,7 @@ logging@1.0.3
 meteor-platform@1.1.1
 meteor@1.1.1
 meteorhacks:kadira-binary-deps@1.2.0
-meteorhacks:kadira@2.11.3
+meteorhacks:kadira@2.11.8
 minifiers@1.1.0
 minimongo@1.0.3
 mobile-status-bar@1.0.0
