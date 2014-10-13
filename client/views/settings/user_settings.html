@@ -4,7 +4,7 @@
 {{#each this}}
 	<li class="list-group-item">
     <p class="lead">
-      <img src="{{GravatarUrl this}}" class="img-circle"> <strong>{{username}}</strong>
+      <img src="{{GravatarUrl this}}" class="img-circle"> <strong>{{username}}</strong> {{profile.name}}
     </p>
       {{#each emails}}
         <div class="user-email-settings">
