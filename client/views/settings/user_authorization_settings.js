@@ -34,7 +34,7 @@ Template.user_authorization_settings.authTypes = function(baseName) {
 Template.user_authorization_settings.rendered = function() {
   var theTemplate = this;
   theTemplate.autorun(function() {
-    var data = Blaze.getCurrentData();
+    var data = Template.currentData();
     if (data)
     {
       var authObj = data.authorization;
