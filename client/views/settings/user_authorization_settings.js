@@ -5,7 +5,7 @@ Template.user_authorization_settings.events({
     Meteor.call('setUserAuthorization', values.insertDoc, function (error, result) {
       if (error)
       {
-        $(ckbox).prop('checked', !ckbox.checked);
+        ckbox.checked = !ckbox.checked;
       }
     });
   }
