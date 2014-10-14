@@ -1,6 +1,8 @@
 <template name="settings">
 	<h1>Settings</h1>
+  {{#if HasPermission 'users' 'insert update remove'}}
 	<p><a href="{{pathFor 'user_settings'}}">Manage Users</a></p>
+  {{/if}}
   {{#if HasPermission 'Workflows' 'insert'}}
 	<p><a href="{{pathFor 'new_workflow'}}">Add Workflows</a></p>
   {{/if}}
