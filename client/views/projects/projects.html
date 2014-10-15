@@ -97,9 +97,9 @@
 					<dt>Est. Number of Pours</dt><dd>{{estimatedPourCount}}</dd>
 					<dt>Est. Number of Pieces</dt><dd>{{estimatedPieceCount}}</dd>
 					<dt>Labor Entry Style</dt><dd>{{laborEntry}}</dd>
-					<dt><a href="{{pathFor 'project_element' id=../id element=id}}">View Pieces for {{id}}</a></dt><dd></dd>
+					<dt><a class="hidden-print" href="{{pathFor 'project_element' id=../id element=id}}">View Pieces for {{id}}</a></dt><dd></dd>
 					{{#if HasPermission 'Pieces' 'insert'}}
-					<dt><a href="{{pathFor 'new_piece' id=../id element=id}}">+ Add Pieces to {{id}}</a></dt><dd></dd>
+					<dt><a class="hidden-print" href="{{pathFor 'new_piece' id=../id element=id}}">+ Add Pieces to {{id}}</a></dt><dd></dd>
 					{{/if}}
 				</dl>
 				<hr>
