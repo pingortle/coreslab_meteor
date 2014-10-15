@@ -31,14 +31,21 @@
   </div>
 </nav>
 <div class="container content" id="main">
-{{#if breadcrumbs}}
-  <ol class="breadcrumb hidden-print">
-    <li><a href="/">Home</a></li>
-  {{#each breadcrumbs}}
-    <li>{{#if route}}<a href="{{pathFor route}}">{{title}}</a>{{else}}{{title}}{{/if}}</li>
-  {{/each}}
-  </ol>
-{{/if}}
+{{#if currentUser}}
+  {{#if breadcrumbs}}
+    <ol class="breadcrumb hidden-print">
+      <li><a href="/">Home</a></li>
+    {{#each breadcrumbs}}
+      <li>{{#if route}}<a href="{{pathFor route}}">{{title}}</a>{{else}}{{title}}{{/if}}</li>
+    {{/each}}
+    </ol>
+  {{/if}}
   {{> yield}}
+{{else}}
+  <div class="jumbotron">
+    <h1>You're Not Logged In</h1>
+    <p>Please click on the sign in button in the upper right of your screen. From there you may either register yourself as a new user or sign into your exsting account.</p>
+  </div>
+{{/if}}
 </div>
 </template>
