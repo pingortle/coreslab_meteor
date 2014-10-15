@@ -61,6 +61,11 @@ AppSchema.Workflow = new SimpleSchema({
 	},
 });
 
+AppSchema.Workflow.messages({
+	"regEx slug": "Please use only lower-case letters, numbers, and dashes.",
+	"regEx actionLinks.$.link": "Invalid link. Please contact the administrator.",
+});
+
 Workflows = new Meteor.Collection('workflows');
 Workflows.attachSchema(AppSchema.Workflow);
 addCollectionDisplayName(Workflows, "Workflows");
@@ -222,8 +227,8 @@ var projectMessages = {};
 AppSchema.Project.messages({
 	"regEx id": projectMessages.id = "Project IDs should be made up of digits and periods, e.g. 123.456",
 	"regEx elements.$.id": projectMessages.elementId = "Product Code should be a three digit number.",
-	"regEx estimate.totalSqFt": AppSchema.Messages.ImperialLength,
-	"regEx actual.totalSqFt": AppSchema.Messages.ImperialLength,
+	"regEx elements.$.estimate.totalSqFt": AppSchema.Messages.ImperialLength,
+	"regEx elements.$.actual.totalSqFt": AppSchema.Messages.ImperialLength,
 });
 
 var cancelUniqueIndex = { unique: false, index: false };
