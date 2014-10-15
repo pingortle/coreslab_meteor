@@ -75,13 +75,14 @@ Template.edit_project.events({
 	},
 });
 
-Template.afObjectField_project_elements.allElements = function() {
-	return [{ label: "Please select a product…", value: "" }]
-		.concat(ProductLines.find({}, {sort: { id: 1 }}).map(function(x) {
-			return { label: x.id + "\t-\t" + x.description, value: x.id };
-		}));
-};
-
-Template.afObjectField_project_elements.elementId = function(element) {
-	return (element || this.atts.name) + ".id";
-};
+Template.afObjectField_project_elements.helpers({
+	allElements: function() {
+		return [{ label: "Please select a product…", value: "" }]
+			.concat(ProductLines.find({}, {sort: { id: 1 }}).map(function(x) {
+				return { label: x.id + "\t-\t" + x.description, value: x.id };
+			}));
+	},
+	elementId: function(element) {
+		return (element || this.atts.name) + ".id";
+	},
+});
