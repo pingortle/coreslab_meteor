@@ -29,7 +29,19 @@ var toListSchema = function(schema, listName) {
 		{});
 };
 
-AppSchema.Workflow = new SimpleSchema({
+var markRequiredFields = function(schema) {
+	_.each(_.values(schema), function(val) {
+		if (val.type != Boolean &&
+		typeof val.type !== 'object' &&
+		!val.optional &&
+		(val.label && val.label.indexOf('*') === -1)) {
+			val.label = val.label + ' *';
+		}
+	});
+	return schema;
+};
+
+AppSchema.Workflow = new SimpleSchema(markRequiredFields({
 	slug: {
 		type: String,
 		label: "Unique Name",
@@ -59,7 +71,7 @@ AppSchema.Workflow = new SimpleSchema({
 		label: "Button Label",
 		max: 140,
 	},
-});
+}));
 
 AppSchema.Workflow.messages({
 	"regEx slug": "Please use only lower-case letters, numbers, and dashes.",
@@ -216,9 +228,9 @@ var projectSchema = {
 	},
 };
 
-AppSchema.Project = new SimpleSchema(_.extend(
+AppSchema.Project = new SimpleSchema(markRequiredFields(_.extend(
 	projectSchema,
-	toListSchema(projectElementSchema, 'elements')));
+	toListSchema(projectElementSchema, 'elements'))));
 
 Projects = new Meteor.Collection('projects');
 Projects.attachSchema(AppSchema.Project);
@@ -235,7 +247,7 @@ AppSchema.Project.messages({
 
 var cancelUniqueIndex = { unique: false, index: false };
 
-AppSchema.Piece = new SimpleSchema({
+AppSchema.Piece = new SimpleSchema(markRequiredFields({
 	projectID: _.extend(projectSchema.id, cancelUniqueIndex),
 	projectElementID: _.extend(projectElementSchema.id, cancelUniqueIndex),
 	mark: {
@@ -289,7 +301,7 @@ AppSchema.Piece = new SimpleSchema({
 		label: "Approved",
 		defaultValue: true,
 	},
-});
+}));
 
 AppSchema.Piece.messages({
 	"regEx projectID": projectMessages.id,
@@ -305,7 +317,7 @@ Pieces = new Meteor.Collection('pieces');
 Pieces.attachSchema(AppSchema.Piece);
 addCollectionDisplayName(Pieces, "Pieces");
 
-AppSchema.Bed = new SimpleSchema({
+AppSchema.Bed = new SimpleSchema(markRequiredFields({
 	name: {
 		type: String,
 		label: "Name",
@@ -325,7 +337,7 @@ AppSchema.Bed = new SimpleSchema({
 		label: "Active",
 		defaultValue: true,
 	},
-});
+}));
 
 AppSchema.Bed.messages({
 	"regEx formLength": AppSchema.Messages.ImperialLength,
@@ -336,7 +348,7 @@ Beds = new Meteor.Collection('beds');
 Beds.attachSchema(AppSchema.Bed);
 addCollectionDisplayName(Beds, "Beds");
 
-AppSchema.ProductLine = new SimpleSchema({
+AppSchema.ProductLine = new SimpleSchema(markRequiredFields({
 	id: {
 		type: String,
 		label: "Product Code",
@@ -362,7 +374,7 @@ AppSchema.ProductLine = new SimpleSchema({
 		label: "Active",
 		defaultValue: true,
 	},
-});
+}));
 
 ProductLines = new Meteor.Collection('productLines');
 ProductLines.attachSchema(AppSchema.ProductLine);
