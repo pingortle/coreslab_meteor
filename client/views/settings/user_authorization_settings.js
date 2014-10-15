@@ -2,10 +2,14 @@ Template.user_authorization_settings.events({
   'change input[type="checkbox"][data-schema-key]': function (e, t) {
     var values = AutoForm.getFormValues('authorizationForm');
     var ckbox = e.target;
+    Status.saving();
     Meteor.call('setUserAuthorization', values.insertDoc, function (error, result) {
       if (error)
       {
+        Status.error(error);
         ckbox.checked = !ckbox.checked;
+      } else {
+        Status.complete();
       }
     });
   }

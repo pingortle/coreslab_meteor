@@ -18,13 +18,22 @@ Template.user_workflow_settings.helpers({
 Template.user_workflow_settings.events({
   'click .workflow-item': function (e, t) {
     var slug = e.target.dataset.slug;
+    Status.saving();
     if (Roles.userIsInRole(t.data.user._id, [slug])) {
       Meteor.call('removeUserFromRole', t.data.user._id, slug, function (error, result) {
-        if (error) console.log(error);
+        if (error) {
+          Status.error(error);
+        } else {
+          Status.complete();
+        }
       });
     } else {
       Meteor.call('addUserToRole', t.data.user._id, slug, function (error, result) {
-        if (error) console.log(error);
+        if (error) {
+          Status.error(error);
+        } else {
+          Status.complete();
+        }
       });
     }
   },
