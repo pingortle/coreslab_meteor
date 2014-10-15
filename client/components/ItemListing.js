@@ -27,7 +27,7 @@ Template.ItemListing.helpers({
   labelFor: function(field, ctx) {
     var schema = getSchema(ctx.collection);
 
-    return schema.schema(field).label;
+    return schema.schema(field).label.replace(' *', '');
   },
   dataFor: function(field, item) {
     return item[field];
@@ -57,7 +57,7 @@ Template.ItemListing_object.helpers({
   labelFor: function(field, ctx) {
     var schema = getSchema(ctx.ctx.collection);
 
-    return schema.schema(ctx.objectKey + "." + field).label;
+    return schema.schema(ctx.objectKey + "." + field).label.replace(' *', '');
   },
   keysFor: function(objectKey, ctx) {
     var schema = getSchema(ctx.collection);
