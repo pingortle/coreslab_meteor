@@ -185,11 +185,13 @@ var projectSchema = {
 		type: Number,
 		label: "Truckloads Permit",
 		min: 0,
+		optional: true,
 	},
 	"estimatedLoads.escort": {
 		type: Number,
 		label: "Truckloads Escort",
 		min: 0,
+		optional: true,
 	},
 
 	elements: {
