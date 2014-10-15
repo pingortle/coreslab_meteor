@@ -1,3 +1,9 @@
+Template.workflows.helpers({
+  moreThanOne: function (workflowsList) {
+    return workflowsList.count() > 0;
+  },
+});
+
 Template.workflows_listing.events({
   'click button.update-item': function (e) {
     var id = e.currentTarget.dataset.itemId;

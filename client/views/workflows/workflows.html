@@ -1,8 +1,15 @@
 <template name="workflows">
 <ul class="nav nav-tabs nav-justified">
-{{#each workflows}}
-{{> workflow_tab}}
-{{/each}}
+{{#if moreThanOne workflows}}
+  {{#each workflows}}
+  {{> workflow_tab}}
+  {{/each}}
+{{else}}
+  <div class="jumbotron">
+    <h1>No Workflows Found</h1>
+    <p>Please contact your administrator to set up your workflow tabs.</p>
+  </div>
+{{/if}}
 </ul>
 <div class="tab-pane">
 {{#with activeWorkflow}}
