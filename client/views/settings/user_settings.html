@@ -3,8 +3,13 @@
 <ul class="list-group">
 {{#each this}}
 	<li class="list-group-item">
+  {{#if IsSuper _id}}
+    <span class="label label-primary pull-right">Admin</span>
+  {{/if}}
     <p class="lead">
-      <img src="{{GravatarUrl this}}" class="img-circle"> <strong>{{username}}</strong> {{profile.name}}
+      <img src="{{GravatarUrl this}}" class="img-circle">
+      <strong>{{username}}</strong>
+      <span class="profile-name">{{profile.name}}</span>
     </p>
       {{#each emails}}
         <div class="user-email-settings">

@@ -154,6 +154,10 @@ li.list-group-item > div:nth-last-of-type(-n + 2):after {
   }
 }
 
+.profile-name {
+  display: inline-block;
+}
+
 #iron-router-progress {
   background-color: silver;
   box-shadow: 0 0 5px silver;
