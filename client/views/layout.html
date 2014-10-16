@@ -42,10 +42,12 @@
   {{/if}}
   {{> yield}}
 {{else}}
+  {{#unless loggingIn}}
   <div class="jumbotron">
     <h1>You're Not Logged In</h1>
     <p>Please click on the sign in button in the upper right of your screen. From there you may either register yourself as a new user or sign into your exsting account.</p>
   </div>
+  {{/unless}}
 {{/if}}
 </div>
 
