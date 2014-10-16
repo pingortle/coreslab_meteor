@@ -44,6 +44,20 @@ Template.new_project.rendered = function () {
 	});
 };
 
+AutoForm.hooks({
+	new_project_form: {
+		onSuccess: function(operation, result, template) {
+			console.log(template.data);
+			Meteor.call('getNextProjectNumber', function (error, result) {
+				if (error) Status.error(error);
+
+				if (result)
+					template.$('input[data-schema-key="id"]').val(result);
+			});
+		},
+	},
+});
+
 Template.edit_project.rendered = function() {
 	var renderContext = this;
 	this.autorun(function () {
