@@ -6,6 +6,14 @@ Meteor.users.allow({
 	}
 });
 
+var padNumber = function(number, padding) {
+	padding = padding || '000';
+	number = number + '';
+	return number.length >= padding.length ?
+		number :
+		(padding + number).slice(0 - padding.length);
+}
+
 // Docs @ http://docs.meteor.com/#meteor_methods
 Meteor.methods({
 	setUserAuthorization: function(doc) {
@@ -58,6 +66,15 @@ Meteor.methods({
 
 		Projects.remove({id: projectId});
 		Pieces.remove({projectID: projectId});
+	},
+	getNextProjectNumber: function () {
+		if (!this.userId) throw new Meteor.Error(403, "Not authorized.");
+
+		var year = "0" + (new Date).getFullYear().toString().substr(2);
+		var lastProject = Projects.findOne({ id: { $gt: year }}, {sort: { id: -1 }});
+		var lastProjectId = lastProject ? lastProject.id : year + ".000";
+
+		return lastProjectId.split(".")[0] + "." + padNumber(+lastProjectId.split(".")[1] + 1);
 	},
 });
 

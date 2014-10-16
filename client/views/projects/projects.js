@@ -34,6 +34,16 @@ Template.new_project.events({
 	},
 });
 
+Template.new_project.rendered = function () {
+	var renderContext = this;
+	Meteor.call('getNextProjectNumber', function (error, result) {
+		if (error) Status.error(error);
+
+		if (result)
+			renderContext.$('input[data-schema-key="id"]').val(result);
+	});
+};
+
 Template.edit_project.rendered = function() {
 	var renderContext = this;
 	this.autorun(function () {
