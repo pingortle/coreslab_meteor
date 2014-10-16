@@ -12,7 +12,7 @@ var padNumber = function(number, padding) {
 	return number.length >= padding.length ?
 		number :
 		(padding + number).slice(0 - padding.length);
-}
+};
 
 // Docs @ http://docs.meteor.com/#meteor_methods
 Meteor.methods({
@@ -70,7 +70,7 @@ Meteor.methods({
 	getNextProjectNumber: function () {
 		if (!this.userId) throw new Meteor.Error(403, "Not authorized.");
 
-		var year = "0" + (new Date).getFullYear().toString().substr(2);
+		var year = "0" + (new Date()).getFullYear().toString().substr(2);
 		var lastProject = Projects.findOne({ id: { $gt: year }}, {sort: { id: -1 }});
 		var lastProjectId = lastProject ? lastProject.id : year + ".000";
 
