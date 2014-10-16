@@ -9,7 +9,7 @@ var removeWords = function(str, words) {
 };
 
 var containsAny = function(it, these) {
-  return _.some(these, function(x) { return it.indexOf(x) > -1 });
+  return _.some(these, function(x) { return it.indexOf(x) > -1; });
 };
 
 Template.afObjectField_action_links.helpers({
