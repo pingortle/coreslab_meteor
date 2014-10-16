@@ -53,6 +53,12 @@ UI.registerHelper('HasPermission', function (collectionParam, type) {
 	});
 });
 
+// This helper tells whether a given user (or current user, if none is supplied)
+// is the super user.
+UI.registerHelper('IsSuper', function (userId) {
+	return isSuper(userId || Meteor.userId());
+});
+
 // This helper hands out gravatar urls for a given user.
 UI.registerHelper('GravatarUrl', function (user) {
 	user = user || Meteor.user() || { emails: [] };
