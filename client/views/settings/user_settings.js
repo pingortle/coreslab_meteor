@@ -9,6 +9,31 @@ Template.user_settings.events({
         if (error) {console.log(error); }
       });
   },
+  'click .toggle-admin-privileges': function (e) {
+    Status.saving();
+    var userId = e.target.dataset.userId;
+    if (isSuper(userId)) {
+      if (Meteor.users.find({roles: "super"}).count() <= 1) {
+        Status.error({ reason: "There must be at least one administrator." });
+      } else {
+        Meteor.call('removeUserFromRole', userId, "super", function (error, result) {
+          if (error) {
+            Status.error(error);
+          } else {
+            Status.complete();
+          }
+        });
+      }
+    } else {
+      Meteor.call('addUserToRole', userId, "super", function (error, result) {
+        if (error) {
+          Status.error(error);
+        } else {
+          Status.complete();
+        }
+      });
+    }
+  },
 });
 
 Template.user_settings.helpers({
