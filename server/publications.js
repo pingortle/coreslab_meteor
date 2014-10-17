@@ -15,7 +15,12 @@ Meteor.publish('managedUsers', function(userId) {
 		user.authorization.users &&
 		_.some(_.values(user.authorization.users));
 	if (Roles.userIsInRole(this.userId, ['super']) || isAuthorized)
-			return Meteor.users.find(userId || {}, { sort: { createdAt: 0 } });
+			return Meteor.users.find(
+				userId || {},
+				{
+					sort: { createdAt: -1 },
+					fields: { services: 0 },
+				});
 	else
 		this.ready();
 });
