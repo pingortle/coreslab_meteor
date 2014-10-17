@@ -20,7 +20,7 @@ Status = {
   error: function(err) {
     Session.set('sAlert', {
       condition: 'red',
-      message: "Error: " + err.reason,
+      message: err.reason,
       timeout: 'no',
       effect: 'stackslide',
       position: 'let-bottom',

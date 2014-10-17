@@ -10,8 +10,8 @@ AutoForm.addHooks(null, {
   onSuccess: function() {
     Status.complete();
   },
-  onError: function(operation) {
-    Status.error({reason: "There was a problem with the " + operation + "."});
+  onError: function(operation, error) {
+    Status.error(error || {reason: "There was a problem with the " + operation + "."});
   }
 });
 
