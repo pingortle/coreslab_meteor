@@ -438,3 +438,18 @@ authSchemaDefinition = _.extend(authSchemaDefinition, {
 });
 
 AppSchema.Authorization = new SimpleSchema(authSchemaDefinition);
+
+AppSchema.NewUser = new SimpleSchema({
+	username: {
+		type: String,
+		regEx: /^[a-z0-9A-Z_]{3,15}$/
+	},
+	fullName: {
+		type: String,
+		optional: true,
+	},
+	email: {
+		type: String,
+		regEx: SimpleSchema.RegEx.Email,
+	},
+});

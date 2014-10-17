@@ -61,3 +61,17 @@ Template.user_settings.helpers({
     return verified ? "disable"  : "enable";
   }
 });
+
+Template.new_user.helpers({
+  newUserSchema: function () {
+    return AppSchema.NewUser;
+  }
+});
+
+AutoForm.hooks({
+  new_user_form: {
+    onSuccess: function(operation) {
+      Router.go('user_settings');
+    }
+  }
+});
