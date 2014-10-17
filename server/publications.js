@@ -18,7 +18,7 @@ Meteor.publish('managedUsers', function(userId) {
 			return Meteor.users.find(
 				userId || {},
 				{
-					sort: { createdAt: -1 },
+					sort: [["username", 1], ["createdAt", 1]],
 					fields: { services: 0 },
 				});
 	else
