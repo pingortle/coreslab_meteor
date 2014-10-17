@@ -5,8 +5,13 @@ Template.user_settings.events({
     var action = isValid ? "disable"  : "enable";
 
     if (confirm("Are you sure you want to " + action + " " + email + "?" ))
+      Status.saving();
       Meteor.call('setEmailVerification', email, !isValid, function (error, result) {
-        if (error) {console.log(error); }
+        if (error) {
+          Status.error(error);
+        } else {
+          Status.complete();
+        }
       });
   },
   'click .toggle-admin-privileges': function (e) {
