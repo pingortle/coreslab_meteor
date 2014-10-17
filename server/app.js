@@ -31,11 +31,17 @@ Meteor.methods({
 		if (!this.userId || !Roles.userIsInRole(this.userId, ['super']))
 			throw new Meteor.Error(403, 'Error 403: Not authorized');
 
+		check(userId, String);
+		check(role, String);
+
 		Roles.addUsersToRoles(userId, [role]);
 	},
 	removeUserFromRole: function(userId, role) {
 		if (!this.userId || !Roles.userIsInRole(this.userId, ['super']))
 			throw new Meteor.Error(403, 'Error 403: Not authorized');
+
+		check(userId, String);
+		check(role, String);
 
 		Roles.removeUsersFromRoles(userId, [role]);
 	},
