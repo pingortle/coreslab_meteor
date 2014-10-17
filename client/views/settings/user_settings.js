@@ -39,6 +39,21 @@ Template.user_settings.events({
       });
     }
   },
+  'click .remove-user': function (e) {
+    Status.saving();
+    var userId = e.target.dataset.userId;
+    if (isSuper(userId)) {
+      Status.error({ reason: "Administrators can't be deleted. Please remove the admin privileges before deleting." });
+    } else {
+      Meteor.users.remove(userId, function (error) {
+        if (error) {
+          Status.error(error);
+        } else {
+          Status.complete();
+        }
+      });
+    }
+  },
 });
 
 Template.user_settings.helpers({

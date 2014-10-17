@@ -21,17 +21,21 @@
         </div>
       {{/each}}
       <div class="btn-group btn-group-xs user-management-links">
-        {{#if IsSuper}}
+        {{#if HasPermission "users" "remove"}}
         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
           Admin <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" role="menu">
+          <li><a class="remove-user" data-user-id="{{_id}}">Remove User</a></li>
+        {{#if IsSuper}}
+          <li class="divider"></li>
           <li>
             <a class="toggle-admin-privileges" data-user-id="{{_id}}">
               {{#if IsSuper _id}}Remove{{else}}Add{{/if}}
               Admin Privileges
             </a>
           </li>
+        {{/if}}
         </ul>
         {{/if}}
         <a class="btn btn-default" href="{{pathFor 'user_authorization_settings' id=_id}}">Authorization</a>
