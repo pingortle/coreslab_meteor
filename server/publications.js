@@ -8,7 +8,13 @@ Meteor.publish('myAuthorizations', function() {
 
 // Publish all users' info to the super user.
 Meteor.publish('managedUsers', function(userId) {
-	if (Roles.userIsInRole(this.userId, ['super']))
+	var user = Meteor.users.findOne(this.userId);
+	var isAuthorized =
+		user &&
+		user.authorization &&
+		user.authorization.users &&
+		_.some(_.values(user.authorization.users));
+	if (Roles.userIsInRole(this.userId, ['super']) || isAuthorized)
 			return Meteor.users.find(userId || {}, { sort: { createdAt: 0 } });
 	else
 		this.ready();
