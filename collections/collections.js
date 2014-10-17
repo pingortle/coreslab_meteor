@@ -402,6 +402,20 @@ _.each(collectionListing, function(x) {
 		{}));
 });
 
+Meteor.users.deny({
+	update: function (userId, docs, fields, modifier) {
+		// "username" and "createdAt" should remain constant.
+		return _.some(fields, function (field) {
+				return _.contains(["username", "createdAt"], field);
+			}) ||
+		// Only profile's owner can edit a profile.
+			_.contains(fields, "profile") &&
+			_.some(docs, function (doc) {
+					return userId !== doc._id;
+				});
+	}
+});
+
 var authSchemaDefinition = _.reduce(
 	_.pluck(collectionListing, '_name'),
 	function (acc, n) {
